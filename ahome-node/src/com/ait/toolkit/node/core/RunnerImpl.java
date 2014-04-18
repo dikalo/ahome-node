@@ -21,7 +21,7 @@ package com.ait.toolkit.node.core;
 class RunnerImpl implements Runner {
     
     @Override
-    public void run(GwtNodeBootstrap bootstrap, Closure<Integer> callback, 
+    public void run(NodeJsBootstrap bootstrap, Closure<Integer> callback, 
             String... args) {
         callback.call(bootstrap.main(args));
     }

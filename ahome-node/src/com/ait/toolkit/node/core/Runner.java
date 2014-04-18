@@ -20,5 +20,5 @@ package com.ait.toolkit.node.core;
  */
 public interface Runner {
 
-    void run(GwtNodeBootstrap bootstrap, Closure<Integer> callback, String... args);
+    void run(NodeJsBootstrap bootstrap, Closure<Integer> callback, String... args);
 }

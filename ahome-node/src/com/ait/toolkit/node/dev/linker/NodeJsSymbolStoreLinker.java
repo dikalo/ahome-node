@@ -32,7 +32,7 @@ import com.google.gwt.dev.util.DefaultTextOutput;
 /**
  * 
  */
-public class GwtNodeSymbolStoreLinker extends GwtNodeLinker {
+public class NodeJsSymbolStoreLinker extends NodeJsLinker {
     
     @Override
     protected void addPreloadCode(TreeLogger logger, LinkerContext context,
@@ -48,7 +48,7 @@ public class GwtNodeSymbolStoreLinker extends GwtNodeLinker {
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(new InputStreamReader(
-                    GwtNodeSymbolStoreLinker.class.getResourceAsStream("SymbolStoreObject.js")));
+                    NodeJsSymbolStoreLinker.class.getResourceAsStream("SymbolStoreObject.js")));
             String line = reader.readLine();
             while (line != null) {
                 line = line.replace("${objectName}", ClientSymbolStore.GLOBAL_JS_OBJECT_NAME);

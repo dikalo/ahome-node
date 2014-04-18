@@ -20,12 +20,12 @@
     <inherits name="com.google.gwt.core.Core" />
 
 <!-- 
-	<entry-point class="com.ait.toolkit.node.core.GwtNode" />
+	<entry-point class="com.ait.toolkit.node.core.NodeJs" />
 -->
 
 	<source path="core" />
 
-    <define-linker name="node" class="com.ait.toolkit.node.dev.linker.GwtNodeLinker" />
+    <define-linker name="node" class="com.ait.toolkit.node.dev.linker.NodeJsLinker" />
      <!-- add-linker name="node" / -->
     
     <replace-with class="com.ait.toolkit.node.core.RunnerImpl">

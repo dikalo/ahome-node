@@ -18,7 +18,7 @@ package com.ait.toolkit.node.dev.debug;
 import java.util.Arrays;
 import java.util.List;
 
-import com.ait.toolkit.node.core.GwtNodeBootstrap;
+import com.ait.toolkit.node.core.NodeJsBootstrap;
 import com.ait.toolkit.node.core.node.fs.Fs;
 import com.ait.toolkit.node.core.node.process.Process;
 import com.ait.toolkit.node.core.node.util.Util;
@@ -29,7 +29,7 @@ import com.ait.toolkit.node.dev.debug.DebugLog.Level;
  * 
  * 
  */
-public class DebugMain extends GwtNodeBootstrap {
+public class DebugMain extends NodeJsBootstrap {
 
     private static String getArg(List<String> argList, String argName) {
         int index = argList.indexOf(argName);

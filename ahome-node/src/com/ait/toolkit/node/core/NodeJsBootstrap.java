@@ -29,7 +29,7 @@ import com.google.gwt.core.client.JsArrayString;
  * 
  * 
  */
-public abstract class GwtNodeBootstrap implements EntryPoint {
+public abstract class NodeJsBootstrap implements EntryPoint {
 
 	@Override
 	public final void onModuleLoad() {
@@ -60,7 +60,7 @@ public abstract class GwtNodeBootstrap implements EntryPoint {
 				}
 				// call the main method
 				Runner runner = GWT.create(Runner.class);
-				runner.run(GwtNodeBootstrap.this, new Closure<Integer>() {
+				runner.run(NodeJsBootstrap.this, new Closure<Integer>() {
 					@Override
 					public void call(Integer result) {
 						if (result != null) {

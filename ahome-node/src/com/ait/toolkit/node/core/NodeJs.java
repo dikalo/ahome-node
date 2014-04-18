@@ -18,14 +18,14 @@ package com.ait.toolkit.node.core;
 import com.google.gwt.core.client.EntryPoint;
 
 /**
- * Entry point for gwt-node. This is currently empty.
+ * Entry point class. This is currently empty.
  * 
  * 
  */
-public class GwtNode implements EntryPoint {
+public class NodeJs implements EntryPoint {
 
-    @Override
-    public void onModuleLoad() {
-    }
+	@Override
+	public void onModuleLoad() {
+	}
 
 }

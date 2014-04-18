@@ -21,6 +21,6 @@
 
 	<source path="symbol" />
 
-    <define-linker name="node" class="com.ait.toolkit.node.dev.linker.GwtNodeSymbolStoreLinker" />
+    <define-linker name="node" class="com.ait.toolkit.node.dev.linker.NodeJsSymbolStoreLinker" />
 
 </module>
