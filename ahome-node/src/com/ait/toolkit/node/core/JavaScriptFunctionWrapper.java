@@ -18,8 +18,7 @@ package com.ait.toolkit.node.core;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * Wrapper around {@link JavaScriptFunction} that can be extended to override
- * {@link #call(JavaScriptFunctionArguments)} and handle it in Java.
+ * Wrapper around {@link JavaScriptFunction} that can be extended to override {@link #call(JavaScriptFunctionArguments)} and handle it in Java.
  * 
  * 
  */
@@ -40,13 +39,13 @@ public abstract class JavaScriptFunctionWrapper {
 	 * @return The native JavaScriptFunction
 	 */
 	public final native JavaScriptFunction getNativeFunction() /*-{
-																var subObj = this.@com.ait.toolkit.node.core.JavaScriptFunctionWrapper::subObj;
-																if (!subObj.func) {
-																var wrapper = this;
-																subObj.func = function() {
-																wrapper.@com.ait.toolkit.node.core.JavaScriptFunctionWrapper::call(Lcom/ait/toolkit/node/core/JavaScriptFunctionArguments;)(arguments);
-																}
-																}
-																return subObj.func;
-																}-*/;
+		var subObj = this.@com.ait.toolkit.node.core.JavaScriptFunctionWrapper::subObj;
+		if (!subObj.func) {
+			var wrapper = this;
+			subObj.func = function() {
+				wrapper.@com.ait.toolkit.node.core.JavaScriptFunctionWrapper::call(Lcom/ait/toolkit/node/core/JavaScriptFunctionArguments;)(arguments);
+			}
+		}
+		return subObj.func;
+	}-*/;
 }

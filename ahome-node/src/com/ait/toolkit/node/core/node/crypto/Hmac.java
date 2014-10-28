@@ -15,33 +15,25 @@
  */
 package com.ait.toolkit.node.core.node.crypto;
 
-import com.ait.toolkit.node.core.meta.GwtNodeFunction;
-import com.ait.toolkit.node.core.meta.GwtNodeObject;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
  * The node.js hmac object
- * 
- * 
  */
-@GwtNodeObject
 public class Hmac extends JavaScriptObject {
 
-    protected Hmac() {
-    }
+	protected Hmac() {
+	}
 
-    @GwtNodeFunction
-    public final native void update(String data) /*-{
-        this.update(data);
-    }-*/;
+	public final native void update(String data) /*-{
+		this.update(data);
+	}-*/;
 
-    @GwtNodeFunction
-    public final native void digest() /*-{
-        this.digest();
-    }-*/;
+	public final native void digest() /*-{
+		this.digest();
+	}-*/;
 
-    @GwtNodeFunction
-    public final native void digest(String encoding) /*-{
-        this.digest(encoding);
-    }-*/;
+	public final native void digest(String encoding) /*-{
+		this.digest(encoding);
+	}-*/;
 }

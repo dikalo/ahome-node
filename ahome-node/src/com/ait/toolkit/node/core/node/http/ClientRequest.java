@@ -15,23 +15,21 @@
  */
 package com.ait.toolkit.node.core.node.http;
 
-import com.ait.toolkit.node.core.meta.GwtNodeObject;
 import com.ait.toolkit.node.core.node.stream.WritableStream;
 
 /**
  * 
  */
-@GwtNodeObject
 public class ClientRequest extends WritableStream {
 
-    protected ClientRequest() {
-    }
-    
-    public final void onResponse(ClientResponseEventHandler handler) {
-        on("response", handler);
-    }
+	protected ClientRequest() {
+	}
 
-    public final native void abort() /*-{
-        this.abort();
-    }-*/;
+	public final void onResponse(ClientResponseEventHandler handler) {
+		on("response", handler);
+	}
+
+	public final native void abort() /*-{
+		this.abort();
+	}-*/;
 }

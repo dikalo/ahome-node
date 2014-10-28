@@ -15,21 +15,17 @@
  */
 package com.ait.toolkit.node.core.node.tls;
 
-import com.ait.toolkit.node.core.meta.GwtNodeFunction;
-import com.ait.toolkit.node.core.meta.GwtNodeObject;
 import com.ait.toolkit.node.core.node.crypto.CredentialsDetails;
 
 /**
  * 
  */
-@GwtNodeObject
 public class Server extends com.ait.toolkit.node.core.node.net.Server {
 
-    protected Server() {
-    }
+	protected Server() {
+	}
 
-    @GwtNodeFunction
-    public final native void addContext(String hostname, CredentialsDetails credentials) /*-{
-        this.addContext(hostname, credentials);
-    }-*/;
+	public final native void addContext(String hostname, CredentialsDetails credentials) /*-{
+		this.addContext(hostname, credentials);
+	}-*/;
 }

@@ -15,26 +15,22 @@
  */
 package com.ait.toolkit.node.core.node.readline;
 
-import com.ait.toolkit.node.core.meta.GwtNodeFunction;
-import com.ait.toolkit.node.core.meta.GwtNodeObject;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
  * 
  */
-@GwtNodeObject
+
 public class Interface extends JavaScriptObject {
 
-    protected Interface() {
-    }
+	protected Interface() {
+	}
 
-    @GwtNodeFunction
-    public final native void setPrompt(String prompt) /*-{
-        this.setPrompt(prompt);
-    }-*/;
+	public final native void setPrompt(String prompt) /*-{
+		this.setPrompt(prompt);
+	}-*/;
 
-    @GwtNodeFunction
-    public final native void setPrompt(String prompt, int length) /*-{
-        this.setPrompt(prompt, length);
-    }-*/;
+	public final native void setPrompt(String prompt, int length) /*-{
+		this.setPrompt(prompt, length);
+	}-*/;
 }

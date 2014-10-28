@@ -18,8 +18,6 @@ package com.ait.toolkit.node.core.node.path;
 import com.ait.toolkit.node.core.JavaScriptFunction;
 import com.ait.toolkit.node.core.JavaScriptFunctionWrapper;
 import com.ait.toolkit.node.core.JavaScriptUtils;
-import com.ait.toolkit.node.core.meta.GwtNodeFunction;
-import com.ait.toolkit.node.core.meta.GwtNodeModule;
 import com.ait.toolkit.node.core.node.Global;
 import com.ait.toolkit.node.core.node.NodeJsModule;
 import com.ait.toolkit.node.core.node.event.BooleanEventHandler;
@@ -27,98 +25,80 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayString;
 
 /**
- * The node.js
- * <a href="http://nodejs.org/docs/v0.5.6/api/path.html">path</a>
- * module.
- * 
- * 
+ * The node.js <a href="http://nodejs.org/docs/v0.5.6/api/path.html">path</a> module.
  */
-@GwtNodeModule
+
 public class Path extends JavaScriptObject implements NodeJsModule {
 
-    private static Path instance;
-    
-    public static Path get() {
-        if (instance == null) {
-            instance = Global.get().require("path");
-        }
-        return instance;
-    }
-    
-    protected Path() {
-    }
+	private static Path instance;
 
-    @GwtNodeFunction
-    public final String join(String... paths) {
-        return join(JavaScriptUtils.toStringArray(paths));
-    }
+	public static Path get() {
+		if (instance == null) {
+			instance = Global.get().require("path");
+		}
+		return instance;
+	}
 
-    @GwtNodeFunction
-    public final native String join(JsArrayString paths) /*-{
-        return this.join.apply(this, paths);
-    }-*/;
+	protected Path() {
+	}
 
-    @GwtNodeFunction
-    public final String resolve(String... to) {
-        return resolve(JavaScriptUtils.toStringArray(to));
-    }
+	public final String join(String... paths) {
+		return join(JavaScriptUtils.toStringArray(paths));
+	}
 
-    @GwtNodeFunction
-    public final native String resolve(JsArrayString to) /*-{
-        return this.resolve.apply(this, to)
-    }-*/;
-    
-    public final native String normalize(String p) /*-{
-        return this.normalize(p);
-    }-*/;
+	public final native String join(JsArrayString paths) /*-{
+		return this.join.apply(this, paths);
+	}-*/;
 
-    @GwtNodeFunction
-    public final native String relative(String from, String to) /*-{
-        return this.relative(from, to);
-    }-*/;
+	public final String resolve(String... to) {
+		return resolve(JavaScriptUtils.toStringArray(to));
+	}
 
-    @GwtNodeFunction
-    public final native String dirname(String p) /*-{
-        return this.dirname(p);
-    }-*/;
+	public final native String resolve(JsArrayString to) /*-{
+		return this.resolve.apply(this, to)
+	}-*/;
 
-    @GwtNodeFunction
-    public final native String basename(String p) /*-{
-        return this.basename(p);
-    }-*/;
+	public final native String normalize(String p) /*-{
+		return this.normalize(p);
+	}-*/;
 
-    @GwtNodeFunction
-    public final native String basename(String p, String ext) /*-{
-        return this.basename(p, ext);
-    }-*/;
+	public final native String relative(String from, String to) /*-{
+		return this.relative(from, to);
+	}-*/;
 
-    @GwtNodeFunction
-    public final native String extname(String p) /*-{
-        return this.extname(p);
-    }-*/;
+	public final native String dirname(String p) /*-{
+		return this.dirname(p);
+	}-*/;
 
-    @GwtNodeFunction
-    public final native void exists(String p) /*-{
-        this.exists(p);
-    }-*/;
+	public final native String basename(String p) /*-{
+		return this.basename(p);
+	}-*/;
 
-    @GwtNodeFunction
-    public final void exists(String p, BooleanEventHandler callback) {
-        exists(p, callback.getNativeFunction());
-    }
+	public final native String basename(String p, String ext) /*-{
+		return this.basename(p, ext);
+	}-*/;
 
-    @GwtNodeFunction
-    public final void exists(String p, JavaScriptFunctionWrapper callback) {
-        exists(p, callback.getNativeFunction());
-    }
+	public final native String extname(String p) /*-{
+		return this.extname(p);
+	}-*/;
 
-    @GwtNodeFunction
-    public final native void exists(String p, JavaScriptFunction callback) /*-{
-        this.exists(p, callback);
-    }-*/;
+	public final native void exists(String p) /*-{
+		this.exists(p);
+	}-*/;
 
-    @GwtNodeFunction
-    public final native boolean existsSync(String p) /*-{
-        return this.exists(p);
-    }-*/;
+	public final void exists(String p, BooleanEventHandler callback) {
+		exists(p, callback.getNativeFunction());
+	}
+
+	public final void exists(String p, JavaScriptFunctionWrapper callback) {
+		exists(p, callback.getNativeFunction());
+	}
+
+	public final native void exists(String p, JavaScriptFunction callback) /*-{
+		this.exists(p, callback);
+	}-*/;
+
+	public final native boolean existsSync(String p) /*-{
+		return this.exists(p);
+	}-*/;
 }

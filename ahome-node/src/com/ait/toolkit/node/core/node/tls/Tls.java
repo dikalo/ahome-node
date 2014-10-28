@@ -18,9 +18,6 @@ package com.ait.toolkit.node.core.node.tls;
 import com.ait.toolkit.node.core.JavaScriptFunction;
 import com.ait.toolkit.node.core.JavaScriptFunctionArguments;
 import com.ait.toolkit.node.core.JavaScriptFunctionWrapper;
-import com.ait.toolkit.node.core.meta.GwtNodeEvent;
-import com.ait.toolkit.node.core.meta.GwtNodeFunction;
-import com.ait.toolkit.node.core.meta.GwtNodeModule;
 import com.ait.toolkit.node.core.node.Global;
 import com.ait.toolkit.node.core.node.NodeJsModule;
 import com.ait.toolkit.node.core.node.event.EventEmitter;
@@ -28,85 +25,70 @@ import com.ait.toolkit.node.core.node.event.ParameterlessEventHandler;
 import com.ait.toolkit.node.core.node.stream.Stream;
 
 /**
- * The node.js
- * <a href="http://nodejs.org/docs/v0.5.6/api/tls.html">TLS</a> module
+ * The node.js TLS module
  * 
  * 
  */
-@GwtNodeModule
+
 public class Tls extends EventEmitter implements NodeJsModule {
 
-    private static Tls instance;
-    
-    public static Tls get() {
-        if (instance == null) {
-            instance = Global.get().require("tls");
-        }
-        return instance;
-    }
-    
-    protected Tls() {
-    }
+	private static Tls instance;
 
-    @GwtNodeEvent
-    public final void onSecureConnection(SecureConnectionEventHandler handler) {
-        on("secureConnection", handler);
-    }
+	public static Tls get() {
+		if (instance == null) {
+			instance = Global.get().require("tls");
+		}
+		return instance;
+	}
 
-    @GwtNodeFunction
-    public final CleartextStream connect(int port,  
-            ConnectOptions options, ParameterlessEventHandler callback) {
-        return this.connect(port, options, callback.getNativeFunction());
-    }
+	protected Tls() {
+	}
 
-    @GwtNodeFunction
-    public final native CleartextStream connect(int port, 
-            ConnectOptions options, JavaScriptFunction callback) /*-{
-        return this.connect(port, options, callback);
-    }-*/;
+	public final void onSecureConnection(SecureConnectionEventHandler handler) {
+		on("secureConnection", handler);
+	}
 
-    @GwtNodeFunction
-    public final CleartextStream connect(int port, String host, 
-            ConnectOptions options, ParameterlessEventHandler callback) {
-        return this.connect(port, host, options, callback.getNativeFunction());
-    }
+	public final CleartextStream connect(int port, ConnectOptions options, ParameterlessEventHandler callback) {
+		return this.connect(port, options, callback.getNativeFunction());
+	}
 
-    @GwtNodeFunction
-    public final native CleartextStream connect(int port, String host, 
-            ConnectOptions options, JavaScriptFunction callback) /*-{
-        return this.connect(port, host, options, callback);
-    }-*/;
-    
-    //TODO: securePair
+	public final native CleartextStream connect(int port, ConnectOptions options, JavaScriptFunction callback) /*-{
+		return this.connect(port, options, callback);
+	}-*/;
 
-    @GwtNodeFunction
-    public final native Server createServer(ServerOptions options) /*-{
-        return this.createServer(options);
-    }-*/;
+	public final CleartextStream connect(int port, String host, ConnectOptions options, ParameterlessEventHandler callback) {
+		return this.connect(port, host, options, callback.getNativeFunction());
+	}
 
-    @GwtNodeFunction
-    public final Server createServer(ServerOptions options, 
-            SecureConnectionEventHandler callback) {
-        return createServer(options, callback.getNativeFunction());
-    }
+	public final native CleartextStream connect(int port, String host, ConnectOptions options, JavaScriptFunction callback) /*-{
+		return this.connect(port, host, options, callback);
+	}-*/;
 
-    @GwtNodeFunction
-    public final Server createServer(ServerOptions options, JavaScriptFunctionWrapper callback) {
-        return createServer(options, callback.getNativeFunction());
-    }
+	// TODO: securePair
 
-    @GwtNodeFunction
-    public final native Server createServer(ServerOptions options, JavaScriptFunction callback) /*-{
-        return this.createServer(options, callback);
-    }-*/;
-    
-    public static abstract class SecureConnectionEventHandler extends JavaScriptFunctionWrapper {
+	public final native Server createServer(ServerOptions options) /*-{
+		return this.createServer(options);
+	}-*/;
 
-        @Override
-        public final void call(JavaScriptFunctionArguments args) {
-            onEvent((Stream) args.get(0));
-        }
-        
-        protected abstract void onEvent(Stream stream);
-    }
+	public final Server createServer(ServerOptions options, SecureConnectionEventHandler callback) {
+		return createServer(options, callback.getNativeFunction());
+	}
+
+	public final Server createServer(ServerOptions options, JavaScriptFunctionWrapper callback) {
+		return createServer(options, callback.getNativeFunction());
+	}
+
+	public final native Server createServer(ServerOptions options, JavaScriptFunction callback) /*-{
+		return this.createServer(options, callback);
+	}-*/;
+
+	public static abstract class SecureConnectionEventHandler extends JavaScriptFunctionWrapper {
+
+		@Override
+		public final void call(JavaScriptFunctionArguments args) {
+			onEvent((Stream) args.get(0));
+		}
+
+		protected abstract void onEvent(Stream stream);
+	}
 }

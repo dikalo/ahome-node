@@ -16,8 +16,6 @@
 package com.ait.toolkit.node.core.node.tty;
 
 import com.ait.toolkit.node.core.JavaScriptUtils;
-import com.ait.toolkit.node.core.meta.GwtNodeFunction;
-import com.ait.toolkit.node.core.meta.GwtNodeModule;
 import com.ait.toolkit.node.core.node.Global;
 import com.ait.toolkit.node.core.node.NodeJsModule;
 import com.google.gwt.core.client.JavaScriptObject;
@@ -25,12 +23,10 @@ import com.google.gwt.core.client.JsArrayInteger;
 import com.google.gwt.core.client.JsArrayString;
 
 /**
- * The node.js <a href="http://nodejs.org/docs/v0.5.6/api/tty.html">tty</a>
- * module.
- * 
+ * The node.js <a href="http://nodejs.org/docs/v0.5.6/api/tty.html">tty</a> module.
  * 
  */
-@GwtNodeModule
+
 public class Tty extends JavaScriptObject implements NodeJsModule {
 
 	private static Tty instance;
@@ -45,35 +41,29 @@ public class Tty extends JavaScriptObject implements NodeJsModule {
 	protected Tty() {
 	}
 
-	@GwtNodeFunction
 	public final TtyProcess open(String path, String... args) {
 		return open(path, JavaScriptUtils.toStringArray(args));
 	}
 
-	@GwtNodeFunction
 	public final native TtyProcess open(String path, JsArrayString args) /*-{
 																			var ttyProc = this.open(path, args);
 																			return @com.ait.toolkit.node.core.node.tty.TtyProcess::new(ILcom/ait/toolkit/node/core/node/childprocess/ChildProcess;)(
 																			ttyProc[0], ttyProc[1]);
 																			}-*/;
 
-	@GwtNodeFunction
 	public final native boolean isatty(int fd) /*-{
-												return this.isatty(fd);
-												}-*/;
+		return this.isatty(fd);
+	}-*/;
 
-	@GwtNodeFunction
 	public final native void setRawMode(boolean mode) /*-{
-														this.setRawMode(mode);
-														}-*/;
+		this.setRawMode(mode);
+	}-*/;
 
-	@GwtNodeFunction
 	public final native void setWindowSize(int fd, int row, int col) /*-{
-																		this.setWindowSize(fd, row, col);
-																		}-*/;
+		this.setWindowSize(fd, row, col);
+	}-*/;
 
-	@GwtNodeFunction
 	public final native JsArrayInteger getWindowSize(int fd) /*-{
-																return this.getWindowSize(fd);
-																}-*/;
+		return this.getWindowSize(fd);
+	}-*/;
 }

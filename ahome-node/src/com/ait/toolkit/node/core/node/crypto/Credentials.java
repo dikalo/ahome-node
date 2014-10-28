@@ -15,8 +15,6 @@
  */
 package com.ait.toolkit.node.core.node.crypto;
 
-import com.ait.toolkit.node.core.meta.GwtNodeObject;
-import com.ait.toolkit.node.core.meta.GwtNodeProperty;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
@@ -24,14 +22,13 @@ import com.google.gwt.core.client.JavaScriptObject;
  * 
  * 
  */
-@GwtNodeObject
+
 public class Credentials extends JavaScriptObject {
 
-    protected Credentials() {
-    }
+	protected Credentials() {
+	}
 
-    @GwtNodeProperty
-    public final native SecureContext context() /*-{
-        return this.context;
-    }-*/;
+	public final native SecureContext context() /*-{
+		return this.context;
+	}-*/;
 }

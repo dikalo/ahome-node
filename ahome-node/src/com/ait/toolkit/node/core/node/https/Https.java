@@ -17,8 +17,6 @@ package com.ait.toolkit.node.core.node.https;
 
 import com.ait.toolkit.node.core.JavaScriptFunction;
 import com.ait.toolkit.node.core.JavaScriptFunctionWrapper;
-import com.ait.toolkit.node.core.meta.GwtNodeFunction;
-import com.ait.toolkit.node.core.meta.GwtNodeModule;
 import com.ait.toolkit.node.core.node.Global;
 import com.ait.toolkit.node.core.node.NodeJsModule;
 import com.ait.toolkit.node.core.node.http.ClientRequest;
@@ -29,80 +27,60 @@ import com.ait.toolkit.node.core.node.http.ServerRequestEventHandler;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * The node.js
- * <a href="http://nodejs.org/docs/v0.5.6/api/https.html">https</a>
- * module.
- * 
- * 
+ * The node.js <a href="http://nodejs.org/docs/v0.5.6/api/https.html">https</a> module.
  */
-@GwtNodeModule
+
 public class Https extends JavaScriptObject implements NodeJsModule {
 
-    private static Https instance;
-    
-    public static Https get() {
-        if (instance == null) {
-            instance = Global.get().require("https");
-        }
-        return instance;
-    }
+	private static Https instance;
 
-    protected Https() {
-    }
-    
-    @GwtNodeFunction
-    public final native Server createServer(CreateServerOptions options) /*-{
-        return this.createServer(options);
-    }-*/;
-    
-    @GwtNodeFunction
-    public final Server createServer(CreateServerOptions options, JavaScriptFunctionWrapper requestListener) {
-        return createServer(options, requestListener.getNativeFunction());
-    }
-    
-    @GwtNodeFunction
-    public final Server createServer(CreateServerOptions options, ServerRequestEventHandler requestListener) {
-        return createServer(options, requestListener.getNativeFunction());
-    }
-    
-    @GwtNodeFunction
-    public final native Server createServer(CreateServerOptions options, JavaScriptFunction requestListener) /*-{
-        return this.createServer(options, requestListener);
-    }-*/;
+	public static Https get() {
+		if (instance == null) {
+			instance = Global.get().require("https");
+		}
+		return instance;
+	}
 
-    @GwtNodeFunction
-    public final ClientRequest request(HttpRequestOptions options, 
-            ClientResponseEventHandler callback) {
-        return request(options, callback.getNativeFunction());
-    }
-    
-    @GwtNodeFunction
-    public final ClientRequest request(HttpRequestOptions options, 
-            JavaScriptFunctionWrapper callback) {
-        return request(options, callback.getNativeFunction());
-    }
-    
-    @GwtNodeFunction
-    public final native ClientRequest request(HttpRequestOptions options,
-            JavaScriptFunction callback) /*-{
-        return this.request(options, callback);
-    }-*/;
+	protected Https() {
+	}
 
-    @GwtNodeFunction
-    public final ClientRequest get(HttpRequestOptions options, 
-            ClientResponseEventHandler callback) {
-        return get(options, callback.getNativeFunction());
-    }
-    
-    @GwtNodeFunction
-    public final ClientRequest get(HttpRequestOptions options, 
-            JavaScriptFunctionWrapper callback) {
-        return get(options, callback.getNativeFunction());
-    }
-    
-    @GwtNodeFunction
-    public final native ClientRequest get(HttpRequestOptions options,
-            JavaScriptFunction callback) /*-{
-        return this.get(options, callback);
-    }-*/;
+	public final native Server createServer(CreateServerOptions options) /*-{
+		return this.createServer(options);
+	}-*/;
+
+	public final Server createServer(CreateServerOptions options, JavaScriptFunctionWrapper requestListener) {
+		return createServer(options, requestListener.getNativeFunction());
+	}
+
+	public final Server createServer(CreateServerOptions options, ServerRequestEventHandler requestListener) {
+		return createServer(options, requestListener.getNativeFunction());
+	}
+
+	public final native Server createServer(CreateServerOptions options, JavaScriptFunction requestListener) /*-{
+		return this.createServer(options, requestListener);
+	}-*/;
+
+	public final ClientRequest request(HttpRequestOptions options, ClientResponseEventHandler callback) {
+		return request(options, callback.getNativeFunction());
+	}
+
+	public final ClientRequest request(HttpRequestOptions options, JavaScriptFunctionWrapper callback) {
+		return request(options, callback.getNativeFunction());
+	}
+
+	public final native ClientRequest request(HttpRequestOptions options, JavaScriptFunction callback) /*-{
+		return this.request(options, callback);
+	}-*/;
+
+	public final ClientRequest get(HttpRequestOptions options, ClientResponseEventHandler callback) {
+		return get(options, callback.getNativeFunction());
+	}
+
+	public final ClientRequest get(HttpRequestOptions options, JavaScriptFunctionWrapper callback) {
+		return get(options, callback.getNativeFunction());
+	}
+
+	public final native ClientRequest get(HttpRequestOptions options, JavaScriptFunction callback) /*-{
+		return this.get(options, callback);
+	}-*/;
 }

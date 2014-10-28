@@ -17,9 +17,6 @@ package com.ait.toolkit.node.dev.debug;
 
 import java.util.Stack;
 
-import org.gwtnode.modules.fibers.Fiber;
-import org.gwtnode.modules.fibers.FiberReturningCallback;
-
 import com.ait.toolkit.node.core.JavaScriptFunctionArguments;
 import com.ait.toolkit.node.core.JavaScriptReturningFunctionWrapper;
 import com.ait.toolkit.node.core.JavaScriptUtils;
@@ -28,6 +25,8 @@ import com.ait.toolkit.node.dev.debug.HostChannel.ReturnMessageCallback;
 import com.ait.toolkit.node.dev.debug.message.InvokeFromClientMessage;
 import com.ait.toolkit.node.dev.debug.message.ReturnMessage;
 import com.ait.toolkit.node.dev.debug.message.Value;
+import com.ait.toolkit.node.modules.Fiber;
+import com.ait.toolkit.node.modules.FiberReturningCallback;
 import com.google.gwt.core.client.JavaScriptException;
 
 /**

@@ -17,83 +17,76 @@ package com.ait.toolkit.node.core.node.http;
 
 import com.ait.toolkit.node.core.JavaScriptUtils;
 import com.ait.toolkit.node.core.JsonStringObjectMap;
-import com.ait.toolkit.node.core.meta.GwtNodeObject;
 import com.ait.toolkit.node.core.node.stream.WritableStream;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayString;
 
-/**
- * 
- */
-@GwtNodeObject
 public class ServerResponse extends WritableStream {
 
-    protected ServerResponse() {
-    }
+	protected ServerResponse() {
+	}
 
-    public final native void writeContinue() /*-{
-        this.writeContinue();
-    }-*/;
+	public final native void writeContinue() /*-{
+		this.writeContinue();
+	}-*/;
 
-    public final native void writeHead(int statusCode) /*-{
-        this.writeHead(statusCode);
-    }-*/;
+	public final native void writeHead(int statusCode) /*-{
+		this.writeHead(statusCode);
+	}-*/;
 
-    public final void writeHead(int statusCode, JsonStringObjectMap<String> headers) {
-        writeHead(statusCode, headers.getNativeObject());
-    }
-    
-    public final native void writeHead(int statusCode, JavaScriptObject headers) /*-{
-        this.writeHead(statusCode, headers);
-    }-*/;
-    
-    public final native void writeHead(int statusCode, String reasonPhrase) /*-{
-        this.writeHead(statusCode, reasonPhrase);
-    }-*/;
+	public final void writeHead(int statusCode, JsonStringObjectMap<String> headers) {
+		writeHead(statusCode, headers.getNativeObject());
+	}
 
-    public final void writeHead(int statusCode, String reasonPhrase,
-            JsonStringObjectMap<String> headers) {
-        writeHead(statusCode, reasonPhrase, headers.getNativeObject());
-    }
-    
-    public final native void writeHead(int statusCode, String reasonPhrase,
-            JavaScriptObject headers) /*-{
-        this.writeHead(statusCode, reasonPhrase, headers);
-    }-*/;
+	public final native void writeHead(int statusCode, JavaScriptObject headers) /*-{
+		this.writeHead(statusCode, headers);
+	}-*/;
 
-    public final native int statusCode() /*-{
-        return this.statusCode;
-    }-*/;
+	public final native void writeHead(int statusCode, String reasonPhrase) /*-{
+		this.writeHead(statusCode, reasonPhrase);
+	}-*/;
 
-    public final native void statusCode(int statusCode) /*-{
-        this.statusCode = statusCode;
-    }-*/;
+	public final void writeHead(int statusCode, String reasonPhrase, JsonStringObjectMap<String> headers) {
+		writeHead(statusCode, reasonPhrase, headers.getNativeObject());
+	}
 
-    public final native void setHeader(String name, String value) /*-{
-        this.setHeader(name, value);
-    }-*/;
+	public final native void writeHead(int statusCode, String reasonPhrase, JavaScriptObject headers) /*-{
+		this.writeHead(statusCode, reasonPhrase, headers);
+	}-*/;
 
-    public final void setHeader(String name, String... value) {
-        setHeader(name, JavaScriptUtils.toStringArray(value));
-    }
+	public final native int statusCode() /*-{
+		return this.statusCode;
+	}-*/;
 
-    public final native void setHeader(String name, JsArrayString value) /*-{
-        this.setHeader(name, value);
-    }-*/;
+	public final native void statusCode(int statusCode) /*-{
+		this.statusCode = statusCode;
+	}-*/;
 
-    public final native JsArrayString getHeader(String name) /*-{
-        return this.getHeader(name);
-    }-*/;
+	public final native void setHeader(String name, String value) /*-{
+		this.setHeader(name, value);
+	}-*/;
 
-    public final native void removeHeader(String name) /*-{
-        this.removeHeader(name);
-    }-*/;
+	public final void setHeader(String name, String... value) {
+		setHeader(name, JavaScriptUtils.toStringArray(value));
+	}
 
-    public final void addTrailers(JsonStringObjectMap<String> trailers) {
-        addTrailers(trailers.getNativeObject());
-    }
+	public final native void setHeader(String name, JsArrayString value) /*-{
+		this.setHeader(name, value);
+	}-*/;
 
-    public final native void addTrailers(JavaScriptObject trailers) /*-{
-        this.writeHead(trailers);
-    }-*/;
+	public final native JsArrayString getHeader(String name) /*-{
+		return this.getHeader(name);
+	}-*/;
+
+	public final native void removeHeader(String name) /*-{
+		this.removeHeader(name);
+	}-*/;
+
+	public final void addTrailers(JsonStringObjectMap<String> trailers) {
+		addTrailers(trailers.getNativeObject());
+	}
+
+	public final native void addTrailers(JavaScriptObject trailers) /*-{
+		this.writeHead(trailers);
+	}-*/;
 }

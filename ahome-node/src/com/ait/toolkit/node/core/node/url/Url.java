@@ -15,57 +15,41 @@
  */
 package com.ait.toolkit.node.core.node.url;
 
-import com.ait.toolkit.node.core.meta.GwtNodeFunction;
-import com.ait.toolkit.node.core.meta.GwtNodeModule;
 import com.ait.toolkit.node.core.node.Global;
 import com.ait.toolkit.node.core.node.NodeJsModule;
 import com.google.gwt.core.client.JavaScriptObject;
 
-/**
- * The node.js
- * <a href="http://nodejs.org/docs/v0.5.6/api/url.html">url</a>
- * module.
- *
- * 
- */
-@GwtNodeModule
 public class Url extends JavaScriptObject implements NodeJsModule {
 
-    private static Url instance;
-    
-    public static Url get() {
-        if (instance == null) {
-            instance = Global.get().require("url");
-        }
-        return instance;
-    }
-    
-    protected Url() {
-    }
+	private static Url instance;
 
-    @GwtNodeFunction
-    public final native ParsedUrl parse(String url) /*-{
-        return this.parse(url);
-    }-*/;
+	public static Url get() {
+		if (instance == null) {
+			instance = Global.get().require("url");
+		}
+		return instance;
+	}
 
-    @GwtNodeFunction
-    public final native ParsedUrl parse(String url, boolean parseQueryString) /*-{
-        return this.parse(url, parseQueryString);
-    }-*/;
+	protected Url() {
+	}
 
-    @GwtNodeFunction
-    public final native ParsedUrl parse(String url, boolean parseQueryString, 
-            boolean slashesDenoteHost) /*-{
-        return this.parse(url, parseQueryString, slashesDenoteHost);
-    }-*/;
+	public final native ParsedUrl parse(String url) /*-{
+		return this.parse(url);
+	}-*/;
 
-    @GwtNodeFunction
-    public final native String format(ParsedUrl urlObj) /*-{
-        return this.format(urlObj);
-    }-*/;
+	public final native ParsedUrl parse(String url, boolean parseQueryString) /*-{
+		return this.parse(url, parseQueryString);
+	}-*/;
 
-    @GwtNodeFunction
-    public final native String resolve(ParsedUrl from, ParsedUrl to) /*-{
-        return this.resolve(from, to);
-    }-*/;
+	public final native ParsedUrl parse(String url, boolean parseQueryString, boolean slashesDenoteHost) /*-{
+		return this.parse(url, parseQueryString, slashesDenoteHost);
+	}-*/;
+
+	public final native String format(ParsedUrl urlObj) /*-{
+		return this.format(urlObj);
+	}-*/;
+
+	public final native String resolve(ParsedUrl from, ParsedUrl to) /*-{
+		return this.resolve(from, to);
+	}-*/;
 }

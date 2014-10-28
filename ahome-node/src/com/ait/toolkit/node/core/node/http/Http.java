@@ -17,92 +17,70 @@ package com.ait.toolkit.node.core.node.http;
 
 import com.ait.toolkit.node.core.JavaScriptFunction;
 import com.ait.toolkit.node.core.JavaScriptFunctionWrapper;
-import com.ait.toolkit.node.core.meta.GwtNodeFunction;
-import com.ait.toolkit.node.core.meta.GwtNodeModule;
 import com.ait.toolkit.node.core.node.Global;
 import com.ait.toolkit.node.core.node.NodeJsModule;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * The node.js
- * <a href="http://nodejs.org/docs/v0.5.6/api/http.html">http</a>
- * module.
+ * The node.js <a href="http://nodejs.org/docs/v0.5.6/api/http.html">http</a> module.
  * 
  * 
  */
-@GwtNodeModule
 public class Http extends JavaScriptObject implements NodeJsModule {
 
-    private static Http instance;
-    
-    public static Http get() {
-        if (instance == null) {
-            instance = Global.get().require("http");
-        }
-        return instance;
-    }
+	private static Http instance;
 
-    protected Http() {
-    }
-    
-    @GwtNodeFunction
-    public final native Server createServer() /*-{
-        return this.createServer();
-    }-*/;
+	public static Http get() {
+		if (instance == null) {
+			instance = Global.get().require("http");
+		}
+		return instance;
+	}
 
-    @GwtNodeFunction
-    public final Server createServer(JavaScriptFunctionWrapper requestListener) {
-        return createServer(requestListener.getNativeFunction());
-    }
+	protected Http() {
+	}
 
-    @GwtNodeFunction
-    public final Server createServer(ServerRequestEventHandler requestListener) {
-        return createServer(requestListener.getNativeFunction());
-    }
+	public final native Server createServer() /*-{
+		return this.createServer();
+	}-*/;
 
-    @GwtNodeFunction
-    public final native Server createServer(JavaScriptFunction requestListener) /*-{
-        return this.createServer(requestListener);
-    }-*/;
+	public final Server createServer(JavaScriptFunctionWrapper requestListener) {
+		return createServer(requestListener.getNativeFunction());
+	}
 
-    @GwtNodeFunction
-    public final ClientRequest request(HttpRequestOptions options, 
-            ClientResponseEventHandler callback) {
-        return request(options, callback.getNativeFunction());
-    }
+	public final Server createServer(ServerRequestEventHandler requestListener) {
+		return createServer(requestListener.getNativeFunction());
+	}
 
-    @GwtNodeFunction
-    public final ClientRequest request(HttpRequestOptions options, 
-            JavaScriptFunctionWrapper callback) {
-        return request(options, callback.getNativeFunction());
-    }
+	public final native Server createServer(JavaScriptFunction requestListener) /*-{
+		return this.createServer(requestListener);
+	}-*/;
 
-    @GwtNodeFunction
-    public final native ClientRequest request(HttpRequestOptions options,
-            JavaScriptFunction callback) /*-{
-        return this.request(options, callback);
-    }-*/;
+	public final ClientRequest request(HttpRequestOptions options, ClientResponseEventHandler callback) {
+		return request(options, callback.getNativeFunction());
+	}
 
-    @GwtNodeFunction
-    public final ClientRequest get(HttpRequestOptions options, 
-            ClientResponseEventHandler callback) {
-        return get(options, callback.getNativeFunction());
-    }
+	public final ClientRequest request(HttpRequestOptions options, JavaScriptFunctionWrapper callback) {
+		return request(options, callback.getNativeFunction());
+	}
 
-    @GwtNodeFunction
-    public final ClientRequest get(HttpRequestOptions options, 
-            JavaScriptFunctionWrapper callback) {
-        return get(options, callback.getNativeFunction());
-    }
+	public final native ClientRequest request(HttpRequestOptions options, JavaScriptFunction callback) /*-{
+		return this.request(options, callback);
+	}-*/;
 
-    @GwtNodeFunction
-    public final native ClientRequest get(HttpRequestOptions options,
-            JavaScriptFunction callback) /*-{
-        return this.get(options, callback);
-    }-*/;
+	public final ClientRequest get(HttpRequestOptions options, ClientResponseEventHandler callback) {
+		return get(options, callback.getNativeFunction());
+	}
 
-    @GwtNodeFunction
-    public final native Agent globalAgent() /*-{
-        return this.globalAgent;
-    }-*/;
+	public final ClientRequest get(HttpRequestOptions options, JavaScriptFunctionWrapper callback) {
+		return get(options, callback.getNativeFunction());
+	}
+
+	public final native ClientRequest get(HttpRequestOptions options, JavaScriptFunction callback) /*-{
+		return this.get(options, callback);
+	}-*/;
+
+	public final native Agent globalAgent() /*-{
+		return this.globalAgent;
+	}-*/;
 }

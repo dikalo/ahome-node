@@ -15,8 +15,6 @@
  */
 package com.ait.toolkit.node.core.node.crypto;
 
-import com.ait.toolkit.node.core.meta.GwtNodeFunction;
-import com.ait.toolkit.node.core.meta.GwtNodeObject;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
@@ -24,24 +22,21 @@ import com.google.gwt.core.client.JavaScriptObject;
  * 
  * 
  */
-@GwtNodeObject
+
 public class Hash extends JavaScriptObject {
 
-    protected Hash() {
-    }
+	protected Hash() {
+	}
 
-    @GwtNodeFunction
-    public final native void update(String data) /*-{
-        this.update(data);
-    }-*/;
+	public final native void update(String data) /*-{
+		this.update(data);
+	}-*/;
 
-    @GwtNodeFunction
-    public final native void digest() /*-{
-        this.digest();
-    }-*/;
+	public final native void digest() /*-{
+		this.digest();
+	}-*/;
 
-    @GwtNodeFunction
-    public final native void digest(String encoding) /*-{
-        this.digest(encoding);
-    }-*/;
+	public final native void digest(String encoding) /*-{
+		this.digest(encoding);
+	}-*/;
 }

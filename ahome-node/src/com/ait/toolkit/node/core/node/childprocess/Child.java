@@ -15,56 +15,45 @@
  */
 package com.ait.toolkit.node.core.node.childprocess;
 
-import com.ait.toolkit.node.core.meta.GwtNodeEvent;
-import com.ait.toolkit.node.core.meta.GwtNodeFunction;
-import com.ait.toolkit.node.core.meta.GwtNodeProperty;
 import com.ait.toolkit.node.core.node.event.EventEmitter;
 import com.ait.toolkit.node.core.node.stream.ReadableStream;
 import com.ait.toolkit.node.core.node.stream.WritableStream;
 
 /**
- * A node.js child process that comes from exec or spawn on
- * {@link ChildProcess}.
+ * A node.js child process that comes from exec or spawn on {@link ChildProcess}.
  * 
  * 
  */
 public class Child extends EventEmitter {
 
-    protected Child() {
-    }
+	protected Child() {
+	}
 
-    @GwtNodeEvent
-    public final void onExit(ExitEventHandler handler) {
-        on("exit", handler);
-    }
+	public final void onExit(ExitEventHandler handler) {
+		on("exit", handler);
+	}
 
-    @GwtNodeProperty
-    public final native WritableStream stdin() /*-{
-        return this.stdin;
-    }-*/;
+	public final native WritableStream stdin() /*-{
+		return this.stdin;
+	}-*/;
 
-    @GwtNodeProperty
-    public final native ReadableStream stdout() /*-{
-        return this.stdout;
-    }-*/;
+	public final native ReadableStream stdout() /*-{
+		return this.stdout;
+	}-*/;
 
-    @GwtNodeProperty
-    public final native ReadableStream stderr() /*-{
-        return this.stderr;
-    }-*/;
+	public final native ReadableStream stderr() /*-{
+		return this.stderr;
+	}-*/;
 
-    @GwtNodeProperty
-    public final native int pid() /*-{
-        return this.pid;
-    }-*/;
+	public final native int pid() /*-{
+		return this.pid;
+	}-*/;
 
-    @GwtNodeFunction
-    public final native void kill() /*-{
-        this.kill();
-    }-*/;
+	public final native void kill() /*-{
+		this.kill();
+	}-*/;
 
-    @GwtNodeFunction
-    public final native void kill(String signal) /*-{
-        this.kill(signal);
-    }-*/;
+	public final native void kill(String signal) /*-{
+		this.kill(signal);
+	}-*/;
 }

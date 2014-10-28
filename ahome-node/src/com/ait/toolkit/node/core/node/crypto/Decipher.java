@@ -15,8 +15,6 @@
  */
 package com.ait.toolkit.node.core.node.crypto;
 
-import com.ait.toolkit.node.core.meta.GwtNodeFunction;
-import com.ait.toolkit.node.core.meta.GwtNodeObject;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
@@ -24,34 +22,29 @@ import com.google.gwt.core.client.JavaScriptObject;
  * 
  * 
  */
-@GwtNodeObject
+
 public class Decipher extends JavaScriptObject {
 
-    protected Decipher() {
-    }
-    
-    @GwtNodeFunction
-    public final native String update(String data) /*-{
-        return this.update(data);
-    }-*/;
+	protected Decipher() {
+	}
 
-    @GwtNodeFunction
-    public final native String update(String data, String inputEncoding) /*-{
-        return this.update(data, inputEncoding);
-    }-*/;
+	public final native String update(String data) /*-{
+		return this.update(data);
+	}-*/;
 
-    @GwtNodeFunction
-    public final native String update(String data, String inputEncoding, String outputEncoding) /*-{
-        return this.update(data, inputEncoding, outputEncoding);
-    }-*/;
+	public final native String update(String data, String inputEncoding) /*-{
+		return this.update(data, inputEncoding);
+	}-*/;
 
-    @GwtNodeFunction("final")
-    public final native String finalOutput() /*-{
-        return this['final']();
-    }-*/;
+	public final native String update(String data, String inputEncoding, String outputEncoding) /*-{
+		return this.update(data, inputEncoding, outputEncoding);
+	}-*/;
 
-    @GwtNodeFunction("final")
-    public final native String finalOutput(String outputEncoding) /*-{
-        return this['final'](outputEncoding);
-    }-*/;
+	public final native String finalOutput() /*-{
+		return this['final']();
+	}-*/;
+
+	public final native String finalOutput(String outputEncoding) /*-{
+		return this['final'](outputEncoding);
+	}-*/;
 }

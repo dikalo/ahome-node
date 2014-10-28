@@ -16,8 +16,6 @@
 package com.ait.toolkit.node.core.node.os;
 
 import com.ait.toolkit.node.core.JsonStringObjectMap;
-import com.ait.toolkit.node.core.meta.GwtNodeFunction;
-import com.ait.toolkit.node.core.meta.GwtNodeModule;
 import com.ait.toolkit.node.core.node.Global;
 import com.ait.toolkit.node.core.node.NodeJsModule;
 import com.google.gwt.core.client.JavaScriptObject;
@@ -25,83 +23,69 @@ import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.JsArrayNumber;
 
 /**
- * The node.js
- * <a href="http://nodejs.org/docs/v0.5.6/api/os.html">os</a>
- * module.
+ * The node.js <a href="http://nodejs.org/docs/v0.5.6/api/os.html">os</a> module.
  * 
  * 
  */
-@GwtNodeModule
 public class Os extends JavaScriptObject implements NodeJsModule {
 
-    private static Os instance;
-    
-    public static Os get() {
-        if (instance == null) {
-            instance = Global.get().require("os");
-        }
-        return instance;
-    }
-    
-    protected Os() {
-    }
+	private static Os instance;
 
-    @GwtNodeFunction
-    public final native String hostname() /*-{
-        return this.hostname();
-    }-*/;
+	public static Os get() {
+		if (instance == null) {
+			instance = Global.get().require("os");
+		}
+		return instance;
+	}
 
-    @GwtNodeFunction
-    public final native String type() /*-{
-        return this.type();
-    }-*/;
+	protected Os() {
+	}
 
-    @GwtNodeFunction
-    public final native String platform() /*-{
-        return this.platform();
-    }-*/;
+	public final native String hostname() /*-{
+		return this.hostname();
+	}-*/;
 
-    @GwtNodeFunction
-    public final native String arch() /*-{
-        return this.arch();
-    }-*/;
+	public final native String type() /*-{
+		return this.type();
+	}-*/;
 
-    @GwtNodeFunction
-    public final native String release() /*-{
-        return this.release();
-    }-*/;
+	public final native String platform() /*-{
+		return this.platform();
+	}-*/;
 
-    @GwtNodeFunction
-    public final native double uptime() /*-{
-        return this.uptime();
-    }-*/;
+	public final native String arch() /*-{
+		return this.arch();
+	}-*/;
 
-    @GwtNodeFunction
-    public final native JsArrayNumber loadavg() /*-{
-        return this.loadavg();
-    }-*/;
+	public final native String release() /*-{
+		return this.release();
+	}-*/;
 
-    @GwtNodeFunction
-    public final native double totalmem() /*-{
-        return this.totalmem();
-    }-*/;
+	public final native double uptime() /*-{
+		return this.uptime();
+	}-*/;
 
-    @GwtNodeFunction
-    public final native double freemem() /*-{
-        return this.freemem();
-    }-*/;
+	public final native JsArrayNumber loadavg() /*-{
+		return this.loadavg();
+	}-*/;
 
-    @GwtNodeFunction
-    public final native JsArray<Cpu> cpus() /*-{
-        return this.cpus();
-    }-*/;
-    
-    public final JsonStringObjectMap<JsArray<NetworkInterfaceAddress>> getNetworkInterfacesMap() {
-        return new JsonStringObjectMap<JsArray<NetworkInterfaceAddress>>(getNetworkInterfaces());
-    }
+	public final native double totalmem() /*-{
+		return this.totalmem();
+	}-*/;
 
-    @GwtNodeFunction
-    public final native JavaScriptObject getNetworkInterfaces() /*-{
-        return this.getNetworkInterfaces();
-    }-*/;
+	public final native double freemem() /*-{
+		return this.freemem();
+	}-*/;
+
+	public final native JsArray<Cpu> cpus() /*-{
+		return this.cpus();
+	}-*/;
+
+	public final JsonStringObjectMap<JsArray<NetworkInterfaceAddress>> getNetworkInterfacesMap() {
+		return new JsonStringObjectMap<JsArray<NetworkInterfaceAddress>>(getNetworkInterfaces());
+	}
+
+	public final native JavaScriptObject getNetworkInterfaces() /*-{
+		return this.getNetworkInterfaces();
+	}-*/;
 }

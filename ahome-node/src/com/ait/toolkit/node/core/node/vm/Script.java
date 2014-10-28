@@ -15,32 +15,26 @@
  */
 package com.ait.toolkit.node.core.node.vm;
 
-import com.ait.toolkit.node.core.meta.GwtNodeFunction;
-import com.ait.toolkit.node.core.meta.GwtNodeObject;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
  * 
  */
-@GwtNodeObject
+
 public class Script extends JavaScriptObject {
-    
-    protected Script() {
-    }
 
-    @GwtNodeFunction
-    public final native <T extends JavaScriptObject> T runInThisContext() /*-{
-        return this.runInThisContext();
-    }-*/;
+	protected Script() {
+	}
 
-    @GwtNodeFunction
-    public final native <T extends JavaScriptObject> T runInNewContext() /*-{
-        return this.runInNewContext();
-    }-*/;
+	public final native <T extends JavaScriptObject> T runInThisContext() /*-{
+		return this.runInThisContext();
+	}-*/;
 
-    @GwtNodeFunction
-    public final native <T extends JavaScriptObject> T runInNewContext(
-            JavaScriptObject sandbox) /*-{
-        return this.runInNewContext(sandbox);
-    }-*/;
+	public final native <T extends JavaScriptObject> T runInNewContext() /*-{
+		return this.runInNewContext();
+	}-*/;
+
+	public final native <T extends JavaScriptObject> T runInNewContext(JavaScriptObject sandbox) /*-{
+		return this.runInNewContext(sandbox);
+	}-*/;
 }

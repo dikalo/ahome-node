@@ -13,29 +13,26 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  */
-package com.ait.toolkit.node.core.meta;
+package com.ait.toolkit.node.modules;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import com.ait.toolkit.node.core.JavaScriptFunctionArguments;
+import com.ait.toolkit.node.core.JavaScriptReturningFunctionWrapper;
 
 /**
- * Annotation defining a gwt-node event
- *
- * 
- */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)
-@Documented
-public @interface GwtNodeEvent {
+* Fiber callback that returns a value.
+*
+* 
+*/
+public abstract class FiberReturningCallback<T> extends JavaScriptReturningFunctionWrapper<T> {
 
-    /**
-     * The name of the event in node.js. If not present, it is the 
-     * word after "on" in this method's name (lowercased first letter).
-     * 
-     * @return
-     */
-    String value() default "";
+    @Override
+    public final T call(JavaScriptFunctionArguments args) {
+        if (args.length() > 0) {
+            return onCreate(args.get(0));
+        } else {
+            return onCreate(null);
+        }
+    }
+
+    public abstract T onCreate(Object param);
 }

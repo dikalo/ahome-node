@@ -15,8 +15,6 @@
  */
 package com.ait.toolkit.node.core.node.crypto;
 
-import com.ait.toolkit.node.core.meta.GwtNodeFunction;
-import com.ait.toolkit.node.core.meta.GwtNodeObject;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
@@ -24,24 +22,21 @@ import com.google.gwt.core.client.JavaScriptObject;
  * 
  * 
  */
-@GwtNodeObject("Sign")
+
 public class Signer extends JavaScriptObject {
 
-    protected Signer() {
-    }
+	protected Signer() {
+	}
 
-    @GwtNodeFunction
-    public final native void update(String data) /*-{
-        this.update(data);
-    }-*/;
+	public final native void update(String data) /*-{
+		this.update(data);
+	}-*/;
 
-    @GwtNodeFunction
-    public final native String sign(String privateKey) /*-{
-        return this.sign(privateKey);
-    }-*/;
+	public final native String sign(String privateKey) /*-{
+		return this.sign(privateKey);
+	}-*/;
 
-    @GwtNodeFunction
-    public final native String sign(String privateKey, String outputFormat) /*-{
-        return this.sign(privateKey, outputFormat);
-    }-*/;
+	public final native String sign(String privateKey, String outputFormat) /*-{
+		return this.sign(privateKey, outputFormat);
+	}-*/;
 }

@@ -17,106 +17,87 @@ package com.ait.toolkit.node.core.node.net;
 
 import com.ait.toolkit.node.core.JavaScriptFunction;
 import com.ait.toolkit.node.core.JavaScriptFunctionWrapper;
-import com.ait.toolkit.node.core.meta.GwtNodeFunction;
-import com.ait.toolkit.node.core.meta.GwtNodeModule;
 import com.ait.toolkit.node.core.node.Global;
 import com.ait.toolkit.node.core.node.NodeJsModule;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * The node.js
- * <a href="http://nodejs.org/docs/v0.5.6/api/net.html">net</a>
- * module.
+ * The node.js <a href="http://nodejs.org/docs/v0.5.6/api/net.html">net</a> module.
  * 
  * 
  */
-@GwtNodeModule
+
 public class Net extends JavaScriptObject implements NodeJsModule {
 
-    private static Net instance;
-    
-    public static Net get() {
-        if (instance == null) {
-            instance = Global.get().require("net");
-        }
-        return instance;
-    }
-    
-    protected Net() {
-    }
-    
-    @GwtNodeFunction
-    public final Server createServer(StreamEventHandler connectionListener) {
-        return createServer(connectionListener.getNativeFunction());
-    }
+	private static Net instance;
 
-    @GwtNodeFunction
-    public final Server createServer(JavaScriptFunctionWrapper connectionListener) {
-        return createServer(connectionListener.getNativeFunction());
-    }
+	public static Net get() {
+		if (instance == null) {
+			instance = Global.get().require("net");
+		}
+		return instance;
+	}
 
-    @GwtNodeFunction
-    public final native Server createServer(JavaScriptFunction connectionListener) /*-{
-        return this.createServer(connectionListener);
-    }-*/;
+	protected Net() {
+	}
 
-    @GwtNodeFunction
-    public final Server createServer(boolean allowHalfOpen,
-            StreamEventHandler connectionListener) {
-        return createServer(allowHalfOpen, connectionListener.getNativeFunction());
-    }
+	public final Server createServer(StreamEventHandler connectionListener) {
+		return createServer(connectionListener.getNativeFunction());
+	}
 
-    @GwtNodeFunction
-    public final Server createServer(boolean allowHalfOpen,
-            JavaScriptFunctionWrapper connectionListener) {
-        return createServer(allowHalfOpen, connectionListener.getNativeFunction());
-    }
+	public final Server createServer(JavaScriptFunctionWrapper connectionListener) {
+		return createServer(connectionListener.getNativeFunction());
+	}
 
-    @GwtNodeFunction
-    public final native Server createServer(boolean allowHalfOpen,
-            JavaScriptFunction connectionListener) /*-{
-        return this.createServer(allowHalfOpen, connectionListener);
-    }-*/;
+	public final native Server createServer(JavaScriptFunction connectionListener) /*-{
+		return this.createServer(connectionListener);
+	}-*/;
 
-    @GwtNodeFunction
-    public final native Socket createConnection(int port) /*-{
-        return this.createConnection(port);
-    }-*/;
+	public final Server createServer(boolean allowHalfOpen, StreamEventHandler connectionListener) {
+		return createServer(allowHalfOpen, connectionListener.getNativeFunction());
+	}
 
-    @GwtNodeFunction
-    public final native Socket createConnection(int port, String host) /*-{
-        return this.createConnection(port, host);
-    }-*/;
+	public final Server createServer(boolean allowHalfOpen, JavaScriptFunctionWrapper connectionListener) {
+		return createServer(allowHalfOpen, connectionListener.getNativeFunction());
+	}
 
-    @GwtNodeFunction
-    public final native Socket createConnection(String path) /*-{
-        return this.createConnection(path);
-    }-*/;
-    
-    //TODO: callback versions please of createConnection
+	public final native Server createServer(boolean allowHalfOpen, JavaScriptFunction connectionListener) /*-{
+		return this.createServer(allowHalfOpen, connectionListener);
+	}-*/;
 
-    @GwtNodeFunction
-    public final native int isIP(String input) /*-{
-        return this.isIP(input);
-    }-*/;
+	public final native Socket createConnection(int port) /*-{
+		return this.createConnection(port);
+	}-*/;
 
-    @GwtNodeFunction
-    public final native boolean isIPv4(String input) /*-{
-        return this.isIPv4(input);
-    }-*/;
+	public final native Socket createConnection(int port, String host) /*-{
+		return this.createConnection(port, host);
+	}-*/;
 
-    @GwtNodeFunction
-    public final native boolean isIPv6(String input) /*-{
-        return this.isIPv6(input);
-    }-*/;
-    
-    //package private...
-    
-    final native Socket createSocket() /*-{
-        return new this.Socket();
-    }-*/;
-    
-    final native Socket createSocket(SocketOptions options) /*-{
-        return new this.Socket(options);
-    }-*/;
+	public final native Socket createConnection(String path) /*-{
+		return this.createConnection(path);
+	}-*/;
+
+	// TODO: callback versions please of createConnection
+
+	public final native int isIP(String input) /*-{
+		return this.isIP(input);
+	}-*/;
+
+	public final native boolean isIPv4(String input) /*-{
+		return this.isIPv4(input);
+	}-*/;
+
+	public final native boolean isIPv6(String input) /*-{
+		return this.isIPv6(input);
+	}-*/;
+
+	// package private...
+
+	final native Socket createSocket() /*-{
+		return new this.Socket();
+	}-*/;
+
+	final native Socket createSocket(SocketOptions options) /*-{
+		return new this.Socket(options);
+	}-*/;
 }

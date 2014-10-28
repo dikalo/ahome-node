@@ -13,30 +13,23 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  */
-package com.ait.toolkit.node.core.meta;
+package com.ait.toolkit.node.modules;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import com.ait.toolkit.node.core.JavaScriptFunctionArguments;
+import com.ait.toolkit.node.core.JavaScriptFunctionWrapper;
 
 /**
- * Annotation defining a gwt-node module
+ * A wrapper for a future callback
  *
  * 
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-@Documented
-public @interface GwtNodeModule {
+public abstract class FutureSuccessCallback<T> extends JavaScriptFunctionWrapper {
 
-    /**
-     * The name of the module in node.js. If not present,
-     * it is assumed to be the all lowercase form of the
-     * class's name.
-     * 
-     * @return
-     */
-    String value() default "";
+    @Override
+    @SuppressWarnings("unchecked")
+    public final void call(JavaScriptFunctionArguments args) {
+        onCallback((T) args.get(0));
+    }
+
+    public abstract void onCallback(T value);
 }

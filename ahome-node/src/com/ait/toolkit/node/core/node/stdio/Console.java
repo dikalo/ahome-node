@@ -15,68 +15,56 @@
  */
 package com.ait.toolkit.node.core.node.stdio;
 
-import com.ait.toolkit.node.core.meta.GwtNodeFunction;
-import com.ait.toolkit.node.core.meta.GwtNodeObject;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * The node.js
- * <a href="http://nodejs.org/docs/v0.5.6/api/stdio.html#console">console</a> object
- *
+ * The node.js <a href="http://nodejs.org/docs/v0.5.6/api/stdio.html#console">console</a> object
+ * 
  * 
  */
-@GwtNodeObject
-public class Console extends JavaScriptObject {
-    
-    public static final native Console get() /*-{
-        return console;
-    }-*/;
 
-    protected Console() {
-    }
-    
-    @GwtNodeFunction
-    public final native void log(String... params) /*-{
-        this.log.apply(this, params);
-    }-*/;
-    
-    @GwtNodeFunction
-    public final native void info(String... params) /*-{
-        this.info.apply(this, params);
-    }-*/;
-    
-    @GwtNodeFunction
-    public final native void warn(String... params) /*-{
-        this.warn.apply(this, params);
-    }-*/;
-    
-    @GwtNodeFunction
-    public final native void error(String... params) /*-{
-        this.error.apply(this, params);
-    }-*/;
-    
-    @GwtNodeFunction
-    public final native void dir(JavaScriptObject obj) /*-{
-        this.dir(obj);
-    }-*/;
-    
-    @GwtNodeFunction
-    public final native void time(String label) /*-{
-        this.time(label);
-    }-*/;
-    
-    @GwtNodeFunction
-    public final native void timeEnd(String label) /*-{
-        this.timeEnd(label);
-    }-*/;
-    
-    @GwtNodeFunction
-    public final native void trace() /*-{
-        this.trace();
-    }-*/;
-    
-    @GwtNodeFunction
-    public final native void assertOk() /*-{
-        this.assert();
-    }-*/;
+public class Console extends JavaScriptObject {
+
+	public static final native Console get() /*-{
+		return console;
+	}-*/;
+
+	protected Console() {
+	}
+
+	public final native void log(String... params) /*-{
+		this.log.apply(this, params);
+	}-*/;
+
+	public final native void info(String... params) /*-{
+		this.info.apply(this, params);
+	}-*/;
+
+	public final native void warn(String... params) /*-{
+		this.warn.apply(this, params);
+	}-*/;
+
+	public final native void error(String... params) /*-{
+		this.error.apply(this, params);
+	}-*/;
+
+	public final native void dir(JavaScriptObject obj) /*-{
+		this.dir(obj);
+	}-*/;
+
+	public final native void time(String label) /*-{
+		this.time(label);
+	}-*/;
+
+	public final native void timeEnd(String label) /*-{
+		this.timeEnd(label);
+	}-*/;
+
+	public final native void trace() /*-{
+		this.trace();
+	}-*/;
+
+	public final native void assertOk() /*-{
+		this.assert();
+	}-*/;
 }

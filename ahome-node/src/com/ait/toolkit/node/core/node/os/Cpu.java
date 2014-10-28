@@ -23,18 +23,18 @@ import com.google.gwt.core.client.JsArray;
  */
 public class Cpu extends JavaScriptObject {
 
-    protected Cpu() {
-    }
-    
-    public final native String model() /*-{
-        return this.model;
-    }-*/;
+	protected Cpu() {
+	}
 
-    public final native int speed() /*-{
-        return this.speed;
-    }-*/;
+	public final native String model() /*-{
+		return this.model;
+	}-*/;
 
-    public final native JsArray<CpuTime> times() /*-{
-        return this.times;
-    }-*/;
+	public final native int speed() /*-{
+		return this.speed;
+	}-*/;
+
+	public final native JsArray<CpuTime> times() /*-{
+		return this.times;
+	}-*/;
 }

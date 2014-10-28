@@ -15,47 +15,38 @@
  */
 package com.ait.toolkit.node.core.node.repl;
 
-import com.ait.toolkit.node.core.meta.GwtNodeFunction;
-import com.ait.toolkit.node.core.meta.GwtNodeModule;
 import com.ait.toolkit.node.core.node.Global;
 import com.ait.toolkit.node.core.node.NodeJsModule;
 import com.ait.toolkit.node.core.node.stream.ReadableStream;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * The node.js
- * <a href="http://nodejs.org/docs/v0.5.6/api/repl.html">repl</a>
- * module.
- *
- * 
+ * The node.js <a href="http://nodejs.org/docs/v0.5.6/api/repl.html">repl</a> module.
  */
-@GwtNodeModule
+
 public class Repl extends JavaScriptObject implements NodeJsModule {
 
-    private static Repl instance;
-    
-    public static Repl get() {
-        if (instance == null) {
-            instance = Global.get().require("repl");
-        }
-        return instance;
-    }
-    
-    protected Repl() {
-    }
+	private static Repl instance;
 
-    @GwtNodeFunction
-    public final native ReplServer start() /*-{
-        return this.start();
-    }-*/;
+	public static Repl get() {
+		if (instance == null) {
+			instance = Global.get().require("repl");
+		}
+		return instance;
+	}
 
-    @GwtNodeFunction
-    public final native ReplServer start(String prompt) /*-{
-        return this.start(prompt);
-    }-*/;
+	protected Repl() {
+	}
 
-    @GwtNodeFunction
-    public final native ReplServer start(String prompt, ReadableStream stream) /*-{
-        return this.start(prompt, stream);
-    }-*/;
+	public final native ReplServer start() /*-{
+		return this.start();
+	}-*/;
+
+	public final native ReplServer start(String prompt) /*-{
+		return this.start(prompt);
+	}-*/;
+
+	public final native ReplServer start(String prompt, ReadableStream stream) /*-{
+		return this.start(prompt, stream);
+	}-*/;
 }

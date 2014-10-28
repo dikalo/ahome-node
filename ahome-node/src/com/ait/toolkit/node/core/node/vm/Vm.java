@@ -15,91 +15,71 @@
  */
 package com.ait.toolkit.node.core.node.vm;
 
-import com.ait.toolkit.node.core.meta.GwtNodeFunction;
-import com.ait.toolkit.node.core.meta.GwtNodeModule;
 import com.ait.toolkit.node.core.node.Global;
 import com.ait.toolkit.node.core.node.NodeJsModule;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * The node.js
- * <a href="http://nodejs.org/docs/v0.5.6/api/vm.html">vm</a>
- * module.
+ * The node.js <a href="http://nodejs.org/docs/v0.5.6/api/vm.html">vm</a> module.
  * 
  * 
  */
-@GwtNodeModule
+
 public class Vm extends JavaScriptObject implements NodeJsModule {
 
-    private static Vm instance;
-    
-    public static Vm get() {
-        if (instance == null) {
-            instance = Global.get().require("vm");
-        }
-        return instance;
-    }
-    
-    protected Vm() {
-    }
+	private static Vm instance;
 
-    @GwtNodeFunction
-    public final native <T extends JavaScriptObject> T runInThisContext(String code) /*-{
-        return this.runInThisContext(code);
-    }-*/;
+	public static Vm get() {
+		if (instance == null) {
+			instance = Global.get().require("vm");
+		}
+		return instance;
+	}
 
-    @GwtNodeFunction
-    public final native <T extends JavaScriptObject> T runInThisContext(String code, 
-            String filename) /*-{
-        return this.runInThisContext(code, filename);
-    }-*/;
+	protected Vm() {
+	}
 
-    @GwtNodeFunction
-    public final native <T extends JavaScriptObject> T runInNewContext(String code) /*-{
-        return this.runInNewContext(code);
-    }-*/;
+	public final native <T extends JavaScriptObject> T runInThisContext(String code) /*-{
+		return this.runInThisContext(code);
+	}-*/;
 
-    @GwtNodeFunction
-    public final native <T extends JavaScriptObject> T runInNewContext(String code, 
-            JavaScriptObject sandbox) /*-{
-        return this.runInNewContext(code, sandbox);
-    }-*/;
+	public final native <T extends JavaScriptObject> T runInThisContext(String code, String filename) /*-{
+		return this.runInThisContext(code, filename);
+	}-*/;
 
-    @GwtNodeFunction
-    public final native <T extends JavaScriptObject> T runInNewContext(String code, 
-            JavaScriptObject sandbox, String filename) /*-{
-        return this.runInNewContext(code, sandbox, filename);
-    }-*/;
+	public final native <T extends JavaScriptObject> T runInNewContext(String code) /*-{
+		return this.runInNewContext(code);
+	}-*/;
 
-    @GwtNodeFunction
-    public final native <T extends JavaScriptObject> T runInContext(String code,
-            Context context) /*-{
-        return this.runInContext(code, context);
-    }-*/;
+	public final native <T extends JavaScriptObject> T runInNewContext(String code, JavaScriptObject sandbox) /*-{
+		return this.runInNewContext(code, sandbox);
+	}-*/;
 
-    @GwtNodeFunction
-    public final native <T extends JavaScriptObject> T runInContext(String code,
-            Context context, String filename) /*-{
-        return this.runInContext(code, context, filename);
-    }-*/;
+	public final native <T extends JavaScriptObject> T runInNewContext(String code, JavaScriptObject sandbox, String filename) /*-{
+		return this.runInNewContext(code, sandbox, filename);
+	}-*/;
 
-    @GwtNodeFunction
-    public final native Context createContext() /*-{
-        return this.createContext();
-    }-*/;
+	public final native <T extends JavaScriptObject> T runInContext(String code, Context context) /*-{
+		return this.runInContext(code, context);
+	}-*/;
 
-    @GwtNodeFunction
-    public final native Context createContext(JavaScriptObject initSandbox) /*-{
-        return this.createContext(initSandbox);
-    }-*/;
+	public final native <T extends JavaScriptObject> T runInContext(String code, Context context, String filename) /*-{
+		return this.runInContext(code, context, filename);
+	}-*/;
 
-    @GwtNodeFunction
-    public static native Script createScript(String code) /*-{
-        return this.createScript(code);
-    }-*/;
+	public final native Context createContext() /*-{
+		return this.createContext();
+	}-*/;
 
-    @GwtNodeFunction
-    public static native Script createScript(String code, String filename) /*-{
-        return this.createScript(code, filename);
-    }-*/;
+	public final native Context createContext(JavaScriptObject initSandbox) /*-{
+		return this.createContext(initSandbox);
+	}-*/;
+
+	public static native Script createScript(String code) /*-{
+		return this.createScript(code);
+	}-*/;
+
+	public static native Script createScript(String code, String filename) /*-{
+		return this.createScript(code, filename);
+	}-*/;
 }

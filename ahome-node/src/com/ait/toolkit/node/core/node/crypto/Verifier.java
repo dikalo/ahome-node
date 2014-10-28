@@ -15,34 +15,26 @@
  */
 package com.ait.toolkit.node.core.node.crypto;
 
-import com.ait.toolkit.node.core.meta.GwtNodeFunction;
-import com.ait.toolkit.node.core.meta.GwtNodeObject;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
  * The node.js verifier object
- * 
- * 
  */
-@GwtNodeObject("Verify")
+
 public class Verifier extends JavaScriptObject {
 
-    protected Verifier() {
-    }
+	protected Verifier() {
+	}
 
-    @GwtNodeFunction
-    public final native void update(String data) /*-{
-        this.update(data);
-    }-*/;
+	public final native void update(String data) /*-{
+		this.update(data);
+	}-*/;
 
-    @GwtNodeFunction
-    public final native boolean verify(String privateKey, String signature) /*-{
-        return this.verify(privateKey, signature);
-    }-*/;
+	public final native boolean verify(String privateKey, String signature) /*-{
+		return this.verify(privateKey, signature);
+	}-*/;
 
-    @GwtNodeFunction
-    public final native boolean verify(String privateKey, String signature,
-            String signatureFormat) /*-{
-        return this.verify(privateKey, signature, signatureFormat);
-    }-*/;
+	public final native boolean verify(String privateKey, String signature, String signatureFormat) /*-{
+		return this.verify(privateKey, signature, signatureFormat);
+	}-*/;
 }

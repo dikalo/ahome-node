@@ -17,9 +17,6 @@ package com.ait.toolkit.node.core.node.readline;
 
 import com.ait.toolkit.node.core.JavaScriptFunction;
 import com.ait.toolkit.node.core.JavaScriptReturningFunction;
-import com.ait.toolkit.node.core.meta.GwtNodeEvent;
-import com.ait.toolkit.node.core.meta.GwtNodeFunction;
-import com.ait.toolkit.node.core.meta.GwtNodeModule;
 import com.ait.toolkit.node.core.node.Global;
 import com.ait.toolkit.node.core.node.NodeJsModule;
 import com.ait.toolkit.node.core.node.event.EventEmitter;
@@ -30,79 +27,63 @@ import com.ait.toolkit.node.core.node.stream.WritableStream;
 import com.google.gwt.core.client.JsArrayString;
 
 /**
- * The node.js
- * <a href="http://nodejs.org/docs/v0.5.6/api/readline.html">readline</a>
- * module.
- *
- * 
+ * The node.js <a href="http://nodejs.org/docs/v0.5.6/api/readline.html">readline</a> module.
  */
-@GwtNodeModule
+
 public class ReadLine extends EventEmitter implements NodeJsModule {
 
-    private static ReadLine instance;
-    
-    public static ReadLine get() {
-        if (instance == null) {
-            instance = Global.get().require("readline");
-        }
-        return instance;
-    }
-    
-    protected ReadLine() {
-    }
+	private static ReadLine instance;
 
-    @GwtNodeEvent
-    public final void onLine(StringEventHandler handler) {
-        on("line", handler);
-    }
+	public static ReadLine get() {
+		if (instance == null) {
+			instance = Global.get().require("readline");
+		}
+		return instance;
+	}
 
-    @GwtNodeEvent
-    public final void onClose(ParameterlessEventHandler handler) {
-        on("close", handler);
-    }
+	protected ReadLine() {
+	}
 
-    @GwtNodeFunction
-    public final native Interface createInterface(ReadableStream input, WritableStream output) /*-{
-        return this.createInterface(input, output);
-    }-*/;
+	public final void onLine(StringEventHandler handler) {
+		on("line", handler);
+	}
 
-    @GwtNodeFunction
-    public final Interface createInterface(ReadableStream input, WritableStream output,
-            Completer completer) {
-        return createInterface(input, output, completer.getNativeFunction());
-    }
+	public final void onClose(ParameterlessEventHandler handler) {
+		on("close", handler);
+	}
 
-    @GwtNodeFunction
-    public final native Interface createInterface(ReadableStream input, WritableStream output,
-            JavaScriptReturningFunction<JsArrayString> completer) /*-{
-        return this.createInterface(input, output, completer);
-    }-*/;
+	public final native Interface createInterface(ReadableStream input, WritableStream output) /*-{
+		return this.createInterface(input, output);
+	}-*/;
 
-    @GwtNodeFunction
-    public final void question(String query, QuestionCallback callback) {
-        question(query, callback.getNativeFunction());
-    }
+	public final Interface createInterface(ReadableStream input, WritableStream output, Completer completer) {
+		return createInterface(input, output, completer.getNativeFunction());
+	}
 
-    @GwtNodeFunction
-    public final native void question(String query, JavaScriptFunction callback) /*-{
-        this.question(query, callback);
-    }-*/;
+	public final native Interface createInterface(ReadableStream input, WritableStream output, JavaScriptReturningFunction<JsArrayString> completer) /*-{
+		return this.createInterface(input, output, completer);
+	}-*/;
 
-    @GwtNodeFunction
-    public final native void close() /*-{
-        this.close();
-    }-*/;
+	public final void question(String query, QuestionCallback callback) {
+		question(query, callback.getNativeFunction());
+	}
 
-    @GwtNodeFunction
-    public final native void pause() /*-{
-        this.pause();
-    }-*/;
+	public final native void question(String query, JavaScriptFunction callback) /*-{
+		this.question(query, callback);
+	}-*/;
 
-    @GwtNodeFunction
-    public final native void resume() /*-{
-        this.resume();
-    }-*/;
+	public final native void close() /*-{
+		this.close();
+	}-*/;
 
-    //TODO: write()
+	public final native void pause() /*-{
+		this.pause();
+	}-*/;
+
+	public final native void resume() /*-{
+		this.resume();
+	}-*/;
+
+	// TODO: write()
 
 }

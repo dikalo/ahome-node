@@ -17,51 +17,43 @@ package com.ait.toolkit.node.core.node.dgram;
 
 import com.ait.toolkit.node.core.JavaScriptFunction;
 import com.ait.toolkit.node.core.JavaScriptFunctionWrapper;
-import com.ait.toolkit.node.core.meta.GwtNodeFunction;
-import com.ait.toolkit.node.core.meta.GwtNodeModule;
 import com.ait.toolkit.node.core.node.Global;
 import com.ait.toolkit.node.core.node.NodeJsModule;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * The node.js
- * <a href="http://nodejs.org/docs/v0.5.6/api/dgram.html">dgram</a>
- * module.
+ * The node.js <a href="http://nodejs.org/docs/v0.5.6/api/dgram.html">dgram</a> module.
  * 
  * 
  */
-@GwtNodeModule
+
 public class Dgram extends JavaScriptObject implements NodeJsModule {
 
-    private static Dgram instance;
-    
-    public static Dgram get() {
-        if (instance == null) {
-            instance = Global.get().require("dgram");
-        }
-        return instance;
-    }
-    
-    protected Dgram() {
-    }
+	private static Dgram instance;
 
-    @GwtNodeFunction
-    public final native Socket createSocket(String type) /*-{
-        return this.createSocket(type);
-    }-*/;
-    
-    @GwtNodeFunction
-    public final Socket createSocket(String type, MessageEventHandler callback) {
-        return createSocket(type, callback.getNativeFunction());
-    }
-    
-    @GwtNodeFunction
-    public final Socket createSocket(String type, JavaScriptFunctionWrapper callback) {
-        return createSocket(type, callback.getNativeFunction());
-    }
-    
-    @GwtNodeFunction
-    public final native Socket createSocket(String type, JavaScriptFunction callback) /*-{
-        return this.createSocket(type, callback);
-    }-*/;
+	public static Dgram get() {
+		if (instance == null) {
+			instance = Global.get().require("dgram");
+		}
+		return instance;
+	}
+
+	protected Dgram() {
+	}
+
+	public final native Socket createSocket(String type) /*-{
+		return this.createSocket(type);
+	}-*/;
+
+	public final Socket createSocket(String type, MessageEventHandler callback) {
+		return createSocket(type, callback.getNativeFunction());
+	}
+
+	public final Socket createSocket(String type, JavaScriptFunctionWrapper callback) {
+		return createSocket(type, callback.getNativeFunction());
+	}
+
+	public final native Socket createSocket(String type, JavaScriptFunction callback) /*-{
+		return this.createSocket(type, callback);
+	}-*/;
 }

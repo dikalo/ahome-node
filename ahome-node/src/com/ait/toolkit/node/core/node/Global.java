@@ -15,72 +15,59 @@
  */
 package com.ait.toolkit.node.core.node;
 
-import com.ait.toolkit.node.core.meta.GwtNodeFunction;
-import com.ait.toolkit.node.core.meta.GwtNodeObject;
-import com.ait.toolkit.node.core.meta.GwtNodeProperty;
 import com.ait.toolkit.node.core.node.process.Process;
 import com.ait.toolkit.node.core.node.stdio.Console;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * The node.js
- * <a href="http://nodejs.org/docs/v0.5.6/api/globals.html">global</a>
- * namespace.
+ * The node.jsglobal</a> namespace.
  * 
  * 
  */
-@GwtNodeObject("global")
 public class Global extends JavaScriptObject {
-    
-    public static final native Global get() /*-{
-        return global;
-    }-*/;
 
-    protected Global() {
-    }
-    
-    @GwtNodeProperty
-    public final Process process() {
-        return Process.get();
-    }
+	public static final native Global get() /*-{
+		return global;
+	}-*/;
 
-    @GwtNodeProperty
-    public final Console console() {
-        return Console.get();
-    }
-    
-    @GwtNodeFunction
-    public final native <T extends JavaScriptObject & NodeJsModule> T require(String name) /*-{
-        return require(name);
-    }-*/;
-    
-    @GwtNodeFunction("require.resolve")
-    public final native String requireResolve(String name) /*-{
-        return require.resolve(name);
-    }-*/;
-    
-    @GwtNodeProperty("require.cache")
-    public final native <T extends JavaScriptObject> T requireCache() /*-{
-        return require.cache;
-    }-*/;
-    
-    //TODO: add compat annotation
-    public final native String filename() /*-{
-        return __filename;
-    }-*/;
+	protected Global() {
+	}
 
-    //TODO: add compat annotation
-    public final native String dirname() /*-{
-        return __dirname;
-    }-*/;
-    
-    @GwtNodeProperty
-    public final native <T extends JavaScriptObject & NodeJsModule> T module() /*-{
-        return module;
-    }-*/;
-    
-    @GwtNodeProperty
-    public final native JavaScriptObject exports() /*-{
-        return exports;
-    }-*/;
+	public final Process process() {
+		return Process.get();
+	}
+
+	public final Console console() {
+		return Console.get();
+	}
+
+	public final native <T extends JavaScriptObject & NodeJsModule> T require(String name) /*-{
+		return require(name);
+	}-*/;
+
+	public final native String requireResolve(String name) /*-{
+		return require.resolve(name);
+	}-*/;
+
+	public final native <T extends JavaScriptObject> T requireCache() /*-{
+		return require.cache;
+	}-*/;
+
+	// TODO: add compat annotation
+	public final native String filename() /*-{
+		return __filename;
+	}-*/;
+
+	// TODO: add compat annotation
+	public final native String dirname() /*-{
+		return __dirname;
+	}-*/;
+
+	public final native <T extends JavaScriptObject & NodeJsModule> T module() /*-{
+		return module;
+	}-*/;
+
+	public final native JavaScriptObject exports() /*-{
+		return exports;
+	}-*/;
 }

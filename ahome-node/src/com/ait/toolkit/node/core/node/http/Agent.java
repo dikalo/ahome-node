@@ -15,7 +15,6 @@
  */
 package com.ait.toolkit.node.core.node.http;
 
-import com.ait.toolkit.node.core.meta.GwtNodeObject;
 import com.ait.toolkit.node.core.node.event.EventEmitter;
 import com.ait.toolkit.node.core.node.event.ParameterlessEventHandler;
 import com.google.gwt.core.client.JsArray;
@@ -24,33 +23,32 @@ import com.google.gwt.core.client.JsArrayString;
 /**
  * 
  */
-@GwtNodeObject
 public class Agent extends EventEmitter {
 
-    protected Agent() {
-    }
-    
-    public final void onUpgrade(ServerUpgradeEventHandler handler) {
-        on("upgrade", handler);
-    }
-    
-    public final void onContinue(ParameterlessEventHandler handler) {
-        on("continue", handler);
-    }
+	protected Agent() {
+	}
 
-    public final native int maxSockets() /*-{
-        return this.maxSockets;
-    }-*/;
-    
-    public final native void maxSockets(int maxSockets) /*-{
-        this.maxSockets = maxSockets;
-    }-*/;
-    
-    public final native JsArrayString sockets() /*-{
-        return this.sockets;
-    }-*/;
-    
-    public final native JsArray<ClientRequest> requests() /*-{
-        return this.requests;
-    }-*/;
+	public final void onUpgrade(ServerUpgradeEventHandler handler) {
+		on("upgrade", handler);
+	}
+
+	public final void onContinue(ParameterlessEventHandler handler) {
+		on("continue", handler);
+	}
+
+	public final native int maxSockets() /*-{
+		return this.maxSockets;
+	}-*/;
+
+	public final native void maxSockets(int maxSockets) /*-{
+		this.maxSockets = maxSockets;
+	}-*/;
+
+	public final native JsArrayString sockets() /*-{
+		return this.sockets;
+	}-*/;
+
+	public final native JsArray<ClientRequest> requests() /*-{
+		return this.requests;
+	}-*/;
 }

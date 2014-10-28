@@ -13,29 +13,26 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  */
-package com.ait.toolkit.node.core.meta;
+package com.ait.toolkit.node.modules;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import com.ait.toolkit.node.core.JavaScriptFunctionArguments;
+import com.ait.toolkit.node.core.JavaScriptFunctionWrapper;
 
 /**
- * Annotation defining a gwt-node property
- *
- * 
- */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)
-@Documented
-public @interface GwtNodeProperty {
+* Creation callback for a fiber that doesn't return.
+*
+* 
+*/
+public abstract class FiberCallback extends JavaScriptFunctionWrapper {
 
-    /**
-     * The name of the property in node.js. If not present,
-     * this is the method's name
-     * 
-     * @return
-     */
-    String value() default "";
+    @Override
+    public final void call(JavaScriptFunctionArguments args) {
+        if (args.length() > 0) {
+            onCreate(args.get(0));
+        } else {
+            onCreate(null);
+        }
+    }
+
+    public abstract void onCreate(Object param);
 }
