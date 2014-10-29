@@ -95,6 +95,29 @@ public class EventEmitter extends JavaScriptObject {
 		emitNative(args);
 	}
 
+	public final native CallbackRegistration addHandler(String event, EventHandler handler)/*-{
+		var f = function() {
+			handler.@com.ait.toolkit.node.core.node.event.EventHandler::onEvent()();
+		};
+		this.addListener(event, f);
+		return @com.ait.toolkit.node.core.node.event.CallbackRegistration::new(Lcom/ait/toolkit/node/core/node/event/EventEmitter;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,event,f);
+	}-*/;
+
+	public final native CallbackRegistration on(String event, EventHandler handler)/*-{
+		var f = function() {
+			handler.@com.ait.toolkit.node.core.node.event.EventHandler::onEvent()();
+		};
+		this.on(event, f);
+		return @com.ait.toolkit.node.core.node.event.CallbackRegistration::new(Lcom/ait/toolkit/node/core/node/event/EventEmitter;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,event,f);
+	}-*/;
+
+	public final native void once(String event, EventHandler handler)/*-{
+		var f = function() {
+			handler.@com.ait.toolkit.node.core.node.event.EventHandler::onEvent()();
+		};
+		this.once(event, f);
+	}-*/;
+
 	private final native void emitNative(JsArrayMixed arguments) /*-{
 		this.emit.apply(this, arguments);
 	}-*/;

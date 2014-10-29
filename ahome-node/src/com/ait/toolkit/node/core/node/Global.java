@@ -27,7 +27,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 public class Global extends JavaScriptObject {
 
 	public static final native Global get() /*-{
-		return global;
+		return $wnd.global;
 	}-*/;
 
 	protected Global() {

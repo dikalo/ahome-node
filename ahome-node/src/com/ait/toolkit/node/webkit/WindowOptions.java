@@ -1,4 +1,4 @@
-package com.ait.toolkit.node.ui;
+package com.ait.toolkit.node.webkit;
 
 import com.google.gwt.core.client.JavaScriptObject;
 

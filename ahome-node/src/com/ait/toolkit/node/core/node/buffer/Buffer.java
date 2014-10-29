@@ -26,7 +26,7 @@ import com.google.gwt.core.client.JsArrayInteger;
 public class Buffer extends JavaScriptObject {
 
 	public static final native Buffer create(int size) /*-{
-		return new Buffer(size);
+		return new $wnd.Buffer(size);
 	}-*/;
 
 	public static final Buffer create(byte... array) {
@@ -34,7 +34,7 @@ public class Buffer extends JavaScriptObject {
 	}
 
 	public static final native Buffer create(JsArrayInteger array) /*-{
-		return new Buffer(array);
+		return new $wnd.Buffer(array);
 	}-*/;
 
 	public static final native Buffer create(String string) /*-{
