@@ -16,7 +16,7 @@ public class Shell extends JavaScriptObject {
 		this.openItem(value);
 	}-*/;
 
-	public native void showItemInFolder(String value)/*-{
+	public final native void showItemInFolder(String value)/*-{
 		this.showItemInFolder(value);
 	}-*/;
 

@@ -44,7 +44,7 @@ public class Menu extends EventEmitter {
 		};
 	}-*/;
 
-	public final native void popup(int x, int y)/*-{
+	public final native void popup(double x, double y)/*-{
 		this.popup(x, y);
 	}-*/;
 

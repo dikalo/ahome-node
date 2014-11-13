@@ -212,20 +212,20 @@ public class Window extends EventEmitter {
 		this.requestAttention(attention);
 	}-*/;
 
-	public final void captureImageAsPng(Base64ImageHandler handler) {
-		_captureImage("png", handler);
+	public final void capturePageAsPng(Base64ImageHandler handler) {
+		_capturePage("png", handler);
 	}
 
-	public final void captureImageAsJpeg(Base64ImageHandler handler) {
-		_captureImage("jpeg", handler);
+	public final void capturePageAsJpeg(Base64ImageHandler handler) {
+		_capturePage("jpeg", handler);
 	}
 
-	public final void captureImageAsPng(BufferImageHandler handler) {
-		_captureImage("png", handler);
+	public final void capturePageAsPng(BufferImageHandler handler) {
+		_capturePage("png", handler);
 	}
 
-	public final void captureImageAsJpg(BufferImageHandler handler) {
-		_captureImage("jpeg", handler);
+	public final void capturePageAsJpeg(BufferImageHandler handler) {
+		_capturePage("jpeg", handler);
 	}
 
 	public final native void setProgressBar(boolean value)/*-{
@@ -330,9 +330,9 @@ public class Window extends EventEmitter {
 
 	// TODO Cookie API
 
-	private final native void _captureImage(String imageFormat, Base64ImageHandler handler)/*-{
+	private final native void _capturePage(String imageFormat, Base64ImageHandler handler)/*-{
 		this
-				.captureImage(
+				.capturePage(
 						function(s) {
 							handler.@com.ait.toolkit.node.webkit.Base64ImageHandler::handlerImage(Ljava/lang/String;)(s);
 						}, {
@@ -341,9 +341,9 @@ public class Window extends EventEmitter {
 						});
 	}-*/;
 
-	private native void _captureImage(String imageFormat, BufferImageHandler handler)/*-{
+	private native void _capturePage(String imageFormat, BufferImageHandler handler)/*-{
 		this
-				.captureImage(
+				.capturePage(
 						function(b) {
 							handler.@com.ait.toolkit.node.webkit.BufferImageHandler::handlerImage(Lcom/ait/toolkit/node/core/node/buffer/Buffer;)(b);
 						}, {

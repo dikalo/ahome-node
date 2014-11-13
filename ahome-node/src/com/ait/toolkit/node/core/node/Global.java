@@ -42,11 +42,11 @@ public class Global extends JavaScriptObject {
 	}
 
 	public final native <T extends JavaScriptObject & NodeJsModule> T require(String name) /*-{
-		return require(name);
+		return $wnd.require(name);
 	}-*/;
 
 	public final native String requireResolve(String name) /*-{
-		return require.resolve(name);
+		return $wnd.require.resolve(name);
 	}-*/;
 
 	public final native <T extends JavaScriptObject> T requireCache() /*-{

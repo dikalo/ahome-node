@@ -26,7 +26,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 public class Console extends JavaScriptObject {
 
 	public static final native Console get() /*-{
-		return console;
+		return $wnd.console;
 	}-*/;
 
 	protected Console() {

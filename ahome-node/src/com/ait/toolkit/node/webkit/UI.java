@@ -13,9 +13,7 @@ public class UI extends JavaScriptObject {
 	}
 
 	public static final native UI get()/*-{
-		var gui = $wnd.require('nw.gui');
-		gui.Screen.Init();
-		return gui;
+		return $wnd.require('nw.gui');
 	}-*/;
 
 	public final native Window getCurrentWindow()/*-{

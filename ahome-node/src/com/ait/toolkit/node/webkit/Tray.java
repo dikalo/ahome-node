@@ -50,7 +50,7 @@ public class Tray extends EventEmitter {
 		return this.menu;
 	}-*/;
 
-	public native void remove()/*-{
+	public final native void remove()/*-{
 		this.remove();
 	}-*/;
 
