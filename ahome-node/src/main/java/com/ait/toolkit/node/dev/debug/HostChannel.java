@@ -1,0 +1,245 @@
+/*
+ Copyright (c) 2014 Ahomé Innovation Technologies. All rights reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
+package com.ait.toolkit.node.dev.debug;
+
+import java.util.Stack;
+
+import com.ait.toolkit.node.core.JavaScriptUtils;
+import com.ait.toolkit.node.core.node.buffer.Buffer;
+import com.ait.toolkit.node.core.node.event.ParameterlessEventHandler;
+import com.ait.toolkit.node.core.node.event.StringOrBufferEventHandler;
+import com.ait.toolkit.node.core.node.net.Socket;
+import com.ait.toolkit.node.dev.debug.BufferStream.StreamIndexOutOfBoundsException;
+import com.ait.toolkit.node.dev.debug.SessionHandler.InvokeResult;
+import com.ait.toolkit.node.dev.debug.message.CheckVersionsMessage;
+import com.ait.toolkit.node.dev.debug.message.FatalErrorMessage;
+import com.ait.toolkit.node.dev.debug.message.FreeValueMessage;
+import com.ait.toolkit.node.dev.debug.message.InvokeFromClientMessage;
+import com.ait.toolkit.node.dev.debug.message.InvokeToClientMessage;
+import com.ait.toolkit.node.dev.debug.message.LoadJsniMessage;
+import com.ait.toolkit.node.dev.debug.message.LoadModuleMessage;
+import com.ait.toolkit.node.dev.debug.message.Message;
+import com.ait.toolkit.node.dev.debug.message.MessageType;
+import com.ait.toolkit.node.dev.debug.message.ProtocolVersionMessage;
+import com.ait.toolkit.node.dev.debug.message.QuitMessage;
+import com.ait.toolkit.node.dev.debug.message.ReturnMessage;
+
+/**
+ * Channel for communicating w/ GWT code server
+ *
+ * 
+ */
+class HostChannel {
+
+    private static final int MINIMUM_PROTOCOL_VERSION = 2;
+    private static final int MAXIMUM_PROTOCOL_VERSION = 2;
+    private static final String HOSTED_HTML_VERSION = "2.1";
+
+    private final String moduleName;
+    private final String host;
+    private final int port;
+    private Socket socket;
+    private final BufferStream stream = new BufferStream();
+    private SessionHandler session;
+    private MessageCallback nextMessageCallback;
+    private final Stack<ReturnMessageCallback> returnMessageCallbacks = new Stack<ReturnMessageCallback>();
+    
+    public HostChannel(String moduleName, String host, int port) {
+        this.moduleName = moduleName;
+        this.host = host;
+        this.port = port;
+    }
+    
+    public void start(SessionHandler sess) {
+        this.session = sess;
+        if (socket != null) {
+            session.getLog().debug("Disconnecting previous channel");
+            disconnectFromHost();
+        }
+        socket = Socket.create();
+        socket.onData(new StringOrBufferEventHandler() {
+            @Override
+            protected void onEvent() {
+                try {
+                    session.getLog().debug("Got buffer");
+                    stream.append(getBuffer());
+                    //grab a message
+                    Message message;
+                    do {
+                        message = getNextMessage();
+                        if (message != null) {
+                            if (session.getLog().isDebugEnabled()) {
+                                session.getLog().debug("Received message: %s", message.toString());
+                            }
+                            handleMessage(message);
+                        }
+                    } while (message != null);
+                    session.getLog().debug("Still have %d bytes available",
+                            stream.getBufferLength());
+                } catch (Exception e) {
+                    session.getLog().error("Error: %s", JavaScriptUtils.
+                            appendException(e, new StringBuilder()));
+                }
+            }
+        });
+        socket.connect(port, host, new ParameterlessEventHandler() {
+            @Override
+            public void onEvent() {
+                session.getLog().debug("Channel connection complete");
+                init();
+            }
+        });
+    }
+    
+    private void init() {
+        session.getLog().debug("Initializing...");
+        sendMessage(new CheckVersionsMessage(MINIMUM_PROTOCOL_VERSION, 
+                MAXIMUM_PROTOCOL_VERSION, HOSTED_HTML_VERSION), new MessageCallback() {
+                    @Override
+                    public void onMessage(Message message) {
+                        if (message instanceof FatalErrorMessage) {
+                            session.fatalError(((FatalErrorMessage) message).getError());
+                            end();
+                        } else if (message instanceof ProtocolVersionMessage) {
+                            //yay!
+                            //my session and my tab are one based on the current ms and a random number
+                            String keyPrefix = Long.toHexString(System.currentTimeMillis()) +
+                                    "_" + Integer.toHexString((int) (Math.random() * Integer.MAX_VALUE));
+                            sendMessage(new LoadModuleMessage(
+                                    //the URL is not really a URL, but rather my host and port
+                                    "gwt-node-debug://" + host + ":" + port, 
+                                    "tab_" + keyPrefix, 
+                                    "session_" + keyPrefix,
+                                    moduleName,
+                                    "gwt-node/0.0.1"));
+                        } else {
+                            throw new IllegalStateException("Unexpected message type: " + message.getType());
+                        }
+                    }
+                });
+    }
+    
+    private void handleMessage(Message message) {
+        try {
+            if (nextMessageCallback != null) {
+                MessageCallback callback = nextMessageCallback;
+                nextMessageCallback = null;
+                callback.onMessage(message);
+            } else {
+                switch (message.getType()) {
+                case LOAD_JSNI:
+                    session.loadJsni(((LoadJsniMessage) message).getJsCode());
+                    break;
+                case FREE_VALUE:
+                    session.freeValues(((FreeValueMessage) message).getRefIds());
+                    break;
+                case INVOKE:
+                    InvokeToClientMessage invokeMessage = (InvokeToClientMessage) message;
+                    InvokeResult result = session.invoke(
+                            invokeMessage.getMethodName(), invokeMessage.getThisValue(), invokeMessage.getArgValues());
+                    sendMessage(new ReturnMessage(result.isException(), result.getValue()));
+                    break;
+                case RETURN:
+                    ReturnMessage returnMessage = (ReturnMessage) message;
+                    if (returnMessageCallbacks.isEmpty()) {
+                        session.getLog().error("Unexpected return message");
+                    } else {
+                        ReturnMessageCallback callback = returnMessageCallbacks.pop();
+                        callback.onMessage(returnMessage);
+                    }
+                    break;
+                case FATAL_ERROR:
+                    session.fatalError(((FatalErrorMessage) message).getError());
+                    end();
+                case QUIT:
+                    end();
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unrecognized message type: " + 
+                            message.getType());
+                }
+            }
+        } catch (Exception e) {
+            session.getLog().error("Error handling message: %s",
+                    JavaScriptUtils.appendException(e, new StringBuilder()));
+        }
+    }
+    
+    private void end() {
+        if (socket != null) {
+            session.getLog().debug("Ending connection");
+            socket.end();
+            socket = null;
+        }
+    }
+
+    public void disconnectFromHost() {
+        if (socket != null) {
+            sendMessage(new QuitMessage());
+            end();
+        }
+    }
+    public void sendMessage(Message message) {
+        if (session.getLog().isDebugEnabled()) {
+            session.getLog().debug("Sending message: %s", message.toString());
+        }
+        Buffer buffer = message.toBuffer();
+        socket.write(buffer);
+    }
+    
+    public void sendMessage(Message message, MessageCallback callback) {
+        if (session.getLog().isDebugEnabled()) {
+            session.getLog().debug("Sending message: %s", message.toString());
+        }
+        Buffer buffer = message.toBuffer();
+        socket.write(buffer);
+        nextMessageCallback = callback;
+    }
+    
+    public void sendMessage(InvokeFromClientMessage message, ReturnMessageCallback callback) {
+        if (session.getLog().isDebugEnabled()) {
+            session.getLog().debug("Sending message: %s", message.toString());
+        }
+        Buffer buffer = message.toBuffer();
+        socket.write(buffer);
+        returnMessageCallbacks.push(callback);
+    }
+    
+    private Message getNextMessage() {
+        try {
+            stream.beginTransaction();
+            MessageType type = MessageType.getMessageType(stream);
+            Message message = type.createMessage(stream, false);
+            stream.commitTransaction();
+            return message;
+        } catch (StreamIndexOutOfBoundsException e) {
+            stream.rollbackTransaction();
+            return null;
+        }
+    }
+    
+    public SessionHandler getSession() {
+        return session;
+    }
+    
+    public static interface MessageCallback {
+        void onMessage(Message message);
+    }
+    
+    public static interface ReturnMessageCallback {
+        void onMessage(ReturnMessage message);
+    }
+}
