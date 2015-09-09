@@ -1,40 +1,62 @@
 /*
- Copyright (c) 2014 Ahomé Innovation Technologies. All rights reserved.
-
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
-
- http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
+ * Copyright (c) 2014,2015 Ahome' Innovation Technologies. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
-
 
 apply plugin: 'java'
 apply plugin: 'maven'
+apply plugin: 'signing'
+
+compileJava.options.encoding = 'UTF-8'
 
 sourceCompatibility = 1.7
 
-archivesBaseName = 'node4j'
-version = '1.0.0-SNAPSHOT'
+targetCompatibility = 1.7
+
+version = '1.0.0-RC1'
+
 group = 'com.ahome-it'
-compileJava.options.encoding = 'UTF-8'
+
+archivesBaseName = 'ahome-node'
+
+task doJavaDocs(type: Javadoc) {
+    source = sourceSets.main.allJava
+    failOnError = false
+    title = 'Ahome-Node - A GWT toolkit for node.js and nw.js.'
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: doJavaDocs) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+compileJava.dependsOn(clean)
 
 jar {
     manifest {
-        attributes 'Implementation-Title': 'Ahome-Node4j', 'Implementation-Version': version
+        attributes 'Implementation-Title': 'Ahome-Node', 'Implementation-Version': version
     }
     from sourceSets.main.allSource
 }
 
 repositories {
     mavenCentral()
-    maven { url "${sonatype_snapshotURL}" }
 }
 
 sourceSets {
@@ -50,11 +72,48 @@ dependencies {
     compile(group: 'com.google.gwt', name: 'gwt-user', version: '2.6.1')
 }
 
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+    archives jar
+}
+
+signing {
+    sign configurations.archives
+}
+
 uploadArchives {
     repositories {
         mavenDeployer {
-            repository(url: "${sonatype_snapshotURL}") {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+            repository(url: "${sonatype_stageingURL}") {
                 authentication(userName: "${sonatype_user}", password: "${sonatype_password}")
+            }
+            pom.project {
+                name 'Ahome-Node'
+                packaging 'jar'
+                description 'Ahome-Node - A GWT toolkit for node.js and nw.js.'
+                url 'https://github.com/ahome-it/ahome-node'
+                scm {
+                    url 'scm:git@github.com:ahome-it/ahome-node.git'
+                    connection 'scm:git@github.com:ahome-it/ahome-node.git'
+                    developerConnection 'scm:git@github.com:ahome-it/ahome-node.git'
+                }
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        distribution 'repo'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'eemi210'
+                        name 'Alain Ekambi'
+                        email 'jazzmatadazz@gmail.com'
+                        url 'http://www.ahome-it.com'
+                    }
+                }
             }
         }
     }
