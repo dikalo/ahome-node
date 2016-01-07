@@ -1,4 +1,4 @@
-package com.ait.toolkit.node.webkit;
+package com.ait.toolkit.node.nw;
 
 import com.ait.toolkit.node.core.node.event.EventEmitter;
 

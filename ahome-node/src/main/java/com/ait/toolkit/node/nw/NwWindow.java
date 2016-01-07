@@ -1,4 +1,4 @@
-package com.ait.toolkit.node.webkit;
+package com.ait.toolkit.node.nw;
 
 import com.ait.toolkit.node.core.node.event.CallbackRegistration;
 import com.ait.toolkit.node.core.node.event.EventEmitter;
@@ -334,7 +334,7 @@ public class NwWindow extends EventEmitter {
 		this
 				.capturePage(
 						function(s) {
-							handler.@com.ait.toolkit.node.webkit.Base64ImageHandler::handlerImage(Ljava/lang/String;)(s);
+							handler.@com.ait.toolkit.node.nw.Base64ImageHandler::handlerImage(Ljava/lang/String;)(s);
 						}, {
 							format : imageFormat,
 							datatype : 'datauri'
@@ -345,7 +345,7 @@ public class NwWindow extends EventEmitter {
 		this
 				.capturePage(
 						function(b) {
-							handler.@com.ait.toolkit.node.webkit.BufferImageHandler::handlerImage(Lcom/ait/toolkit/node/core/node/buffer/Buffer;)(b);
+							handler.@com.ait.toolkit.node.nw.BufferImageHandler::handlerImage(Lcom/ait/toolkit/node/core/node/buffer/Buffer;)(b);
 						}, {
 							format : imageFormat,
 							datatype : 'buffer'

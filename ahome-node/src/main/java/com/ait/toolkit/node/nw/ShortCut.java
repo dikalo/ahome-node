@@ -1,4 +1,4 @@
-package com.ait.toolkit.node.webkit;
+package com.ait.toolkit.node.nw;
 
 import com.ait.toolkit.node.core.node.event.CallbackRegistration;
 import com.ait.toolkit.node.core.node.event.EventEmitter;
@@ -26,7 +26,7 @@ public class ShortCut extends EventEmitter {
 
 	public final native void setFaile(ShortCutFailedHandler handler)/*-{
 		this.active = function(s) {
-			handler.@com.ait.toolkit.node.webkit.ShortCutFailedHandler::onShortCutFailed(Ljava/lang/String;)(s);
+			handler.@com.ait.toolkit.node.nw.ShortCutFailedHandler::onShortCutFailed(Ljava/lang/String;)(s);
 		};
 	}-*/;
 

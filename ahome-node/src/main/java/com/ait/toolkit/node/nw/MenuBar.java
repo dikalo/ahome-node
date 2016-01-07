@@ -1,4 +1,4 @@
-package com.ait.toolkit.node.webkit;
+package com.ait.toolkit.node.nw;
 
 
 public class MenuBar extends Menu {

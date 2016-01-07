@@ -1,4 +1,4 @@
-package com.ait.toolkit.node.webkit;
+package com.ait.toolkit.node.nw;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
