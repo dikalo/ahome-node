@@ -4,6 +4,7 @@ import com.ait.toolkit.node.core.node.event.CallbackRegistration;
 import com.ait.toolkit.node.core.node.event.EventEmitter;
 import com.ait.toolkit.node.core.node.event.EventHandler;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.user.client.Window;
 
 /**
  * Window is a wrapper of DOM's window object, it has extended operations and can receive various window events.
@@ -16,11 +17,35 @@ public class NwWindow extends EventEmitter {
 
     }
 
-    public final native NwWindow open( String url, NwWindowOptions options )/*-{
-		return this.open(url, options);
+    public final native void open( String url )/*-{
+		this.open(url);
     }-*/;
 
-    public final native com.google.gwt.user.client.Window getDom()/*-{
+    public final native void open( String url, NwWindowOptions options )/*-{
+		this.open(url, options);
+    }-*/;
+
+    public final native void open( String url, NwWindowOptions options, NwWindowOpenHandler openHandler )/*-{
+		this
+				.open(
+						url,
+						options,
+						function(w) {
+							openHandler.@com.ait.toolkit.node.nw.NwWindowOpenHandler::onWindowOpen(Lcom/ait/toolkit/node/nw/NwWindow;)(w);
+						});
+    }-*/;
+
+    public final native void open( String url, NwWindowOpenHandler openHandler )/*-{
+		this
+				.open(
+						url,
+						null,
+						function(w) {
+							openHandler.@com.ait.toolkit.node.nw.NwWindowOpenHandler::onWindowOpen(Lcom/ait/toolkit/node/nw/NwWindow;)(w);
+						});
+    }-*/;
+
+    public final native Window getDom()/*-{
 		return this.window;
     }-*/;
 
@@ -38,6 +63,14 @@ public class NwWindow extends EventEmitter {
 
     public final native void setWidth( int value )/*-{
 		this.width = value;
+    }-*/;
+
+    public final native int getHeight()/*-{
+		return this.height;
+    }-*/;
+
+    public final native void setHeight( int value )/*-{
+		this.height = value;
     }-*/;
 
     public final native void setTitle( String value )/*-{
@@ -60,16 +93,8 @@ public class NwWindow extends EventEmitter {
 		return this.isFullscreen;
     }-*/;
 
-    public final native void setFullScreen( boolean value )/*-{
-		this.isFullscreen = value;
-    }-*/;
-
     public final native boolean isKioskMode()/*-{
 		return this.isKioskMode;
-    }-*/;
-
-    public final native void setKioskMode( boolean value )/*-{
-		this.isKioskMode = value;
     }-*/;
 
     public final native void setZoomLevel( int value )/*-{
@@ -120,6 +145,10 @@ public class NwWindow extends EventEmitter {
 		this.reload();
     }-*/;
 
+    public final native void reloadDev()/*-{
+		this.reloadDev();
+    }-*/;
+
     public final native void reloadIgnoringCache()/*-{
 		this.reloadIgnoringCache();
     }-*/;
@@ -149,6 +178,10 @@ public class NwWindow extends EventEmitter {
     }-*/;
 
     public final native void toggleFullscreen()/*-{
+		this.toggleFullscreen();
+    }-*/;
+
+    public final native void setTransparent( boolean value )/*-{
 		this.toggleFullscreen();
     }-*/;
 

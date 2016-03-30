@@ -2,6 +2,7 @@ package com.ait.toolkit.node.nw;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
+import com.google.gwt.user.client.Window;
 
 /**
  * UI Module inside node webkit
@@ -20,8 +21,8 @@ public class NW extends JavaScriptObject {
 		return this.Window.get();
     }-*/;
 
-    public final native NwWindow getWindow()/*-{
-		return this.Window;
+    public final native NwWindow getWindow( Window window )/*-{
+		return this.Window.get(window);
     }-*/;
 
     public final native Menu createMenu()/*-{
