@@ -1,83 +1,83 @@
 package com.ait.toolkit.node.nw;
 
-import com.ait.toolkit.node.core.node.event.EventEmitter;
 import com.ait.toolkit.node.core.node.event.EventHandler;
+import com.google.gwt.core.client.JavaScriptObject;
 
-public class MenuItem extends EventEmitter {
+public class MenuItem extends JavaScriptObject {
 
-	protected MenuItem() {
+    protected MenuItem() {
 
-	}
+    }
 
-	public final native MenuItem addClickHandler(EventHandler handler)/*-{
+    public final native MenuItem addClickHandler( EventHandler handler )/*-{
 		this.click = function() {
 			handler.@com.ait.toolkit.node.core.node.event.EventHandler::onEvent()();
 		};
 		return this;
-	}-*/;
+    }-*/;
 
-	public final native String getType()/*-{
+    public final native String getType()/*-{
 		return this.type;
-	}-*/;
+    }-*/;
 
-	public final native String getLabel()/*-{
+    public final native String getLabel()/*-{
 		return this.label;
-	}-*/;
+    }-*/;
 
-	public final native MenuItem setLabel(String value)/*-{
+    public final native MenuItem setLabel( String value )/*-{
 		this.label = value;
 		return this;
-	}-*/;
+    }-*/;
 
-	public final native String getIcon()/*-{
+    public final native String getIcon()/*-{
 		return this.icon;
-	}-*/;
+    }-*/;
 
-	public final native MenuItem setIcon(String value)/*-{
+    public final native MenuItem setIcon( String value )/*-{
 		this.icon = value;
 		return this;
-	}-*/;
+    }-*/;
 
-	public final native String getTooltip()/*-{
+    public final native String getTooltip()/*-{
 		return this.tooltip;
-	}-*/;
+    }-*/;
 
-	public final native MenuItem setTooltip(String value)/*-{
+    public final native MenuItem setTooltip( String value )/*-{
 		this.tooltip = value;
 		return this;
-	}-*/;
+    }-*/;
 
-	public final native boolean isChecked()/*-{
+    public final native boolean isChecked()/*-{
 		return this.checked;
-	}-*/;
+    }-*/;
 
-	public final native MenuItem setChecked(boolean value)/*-{
+    public final native MenuItem setChecked( boolean value )/*-{
 		this.checked = value;
 		return this;
-	}-*/;
+    }-*/;
 
-	public final native boolean isEnabled()/*-{
+    public final native boolean isEnabled()/*-{
 		return this.enabled;
-	}-*/;
+    }-*/;
 
-	public final native MenuItem setEnabled(boolean value)/*-{
+    public final native MenuItem setEnabled( boolean value )/*-{
 		this.enabled = value;
 		return this;
-	}-*/;
+    }-*/;
 
-	public final native MenuItem setSubMenu(Menu menu)/*-{
+    public final native MenuItem setSubMenu( Menu menu )/*-{
 		this.submenu = menu;
 		return this;
-	}-*/;
+    }-*/;
 
-	public final native MenuItem setKey(String value)/*-{
+    public final native MenuItem setKey( String value )/*-{
 		this.key = value;
 		return this;
-	}-*/;
+    }-*/;
 
-	public final native MenuItem setModifiers(String value)/*-{
+    public final native MenuItem setModifiers( String value )/*-{
 		this.modifiers = value;
 		return this;
-	}-*/;
+    }-*/;
 
 }

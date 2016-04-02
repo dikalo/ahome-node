@@ -1,12 +1,10 @@
 package com.ait.toolkit.node.nw;
 
+import com.ait.toolkit.node.core.node.event.EventHandler;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.user.client.Window;
 
-/**
- * UI Module inside node webkit
- */
 public class NW extends JavaScriptObject {
 
     protected NW() {
@@ -14,7 +12,7 @@ public class NW extends JavaScriptObject {
     }
 
     public static final native NW get()/*-{
-		return $wnd.require('nw');
+		return $wnd.nw;
     }-*/;
 
     public final native NwWindow getCurrentWindow()/*-{
@@ -39,11 +37,22 @@ public class NW extends JavaScriptObject {
 		});
     }-*/;
 
+    public final native MenuItem createMenuItem( String menuLabel, Menu childMenu )/*-{
+		return new this.MenuItem({
+			label : menuLabel,
+			submenu : childMenu
+		});
+    }-*/;
+
     public final native MenuItem createMenuItem( String menuLabel )/*-{
 		return new this.MenuItem({
 			label : menuLabel
 		});
     }-*/;
+
+    public final MenuItem createMenuItem( String label, EventHandler clickHandler ) {
+        return createMenuItem( label ).addClickHandler( clickHandler );
+    }
 
     public final native MenuItem createSeparator()/*-{
 		return new this.MenuItem({
@@ -51,9 +60,10 @@ public class NW extends JavaScriptObject {
 		});
     }-*/;
 
-    public final native MenuItem createCheckBox()/*-{
+    public final native MenuItem createCheckBox( String itemLabel )/*-{
 		return new this.MenuItem({
-			type : 'checkbox'
+			type : 'checkbox',
+			label : itemLabel
 		});
     }-*/;
 

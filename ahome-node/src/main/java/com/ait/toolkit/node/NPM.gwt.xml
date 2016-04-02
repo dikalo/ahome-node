@@ -14,8 +14,5 @@
 
 <module>
     <inherits name="com.google.gwt.core.Core" />
-    <inherits name="com.ait.toolkit.node.Modules" />
-    <inherits name="com.ait.toolkit.node.NPM" />
-    
-	<source path="core" />
+	<source path="npm" />
 </module>

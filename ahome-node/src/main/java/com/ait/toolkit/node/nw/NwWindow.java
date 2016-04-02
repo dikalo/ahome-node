@@ -1,7 +1,5 @@
 package com.ait.toolkit.node.nw;
 
-import com.ait.toolkit.node.core.node.event.CallbackRegistration;
-import com.ait.toolkit.node.core.node.event.EventEmitter;
 import com.ait.toolkit.node.core.node.event.EventHandler;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.Window;
@@ -11,7 +9,7 @@ import com.google.gwt.user.client.Window;
  * <p>
  * Every Window is an instance of EventEmitter object, and you're able to use Window.on(...) to respond to native window's events.
  */
-public class NwWindow extends EventEmitter {
+public class NwWindow extends JavaScriptObject {
 
     protected NwWindow() {
 
@@ -277,89 +275,96 @@ public class NwWindow extends EventEmitter {
 		this.eval(iframe, script);
     }-*/;
 
-    public final CallbackRegistration addCloseHandler( EventHandler handler ) {
-        return addHandler( "close", handler );
+    public final void addCloseHandler( EventHandler handler ) {
+        addHandler( "close", handler );
     }
 
-    public final CallbackRegistration addClosedHandler( EventHandler handler ) {
-        return addHandler( "closed", handler );
+    public final void addClosedHandler( EventHandler handler ) {
+        addHandler( "closed", handler );
     }
 
-    public final CallbackRegistration addLoadingHandler( EventHandler handler ) {
-        return addHandler( "loading", handler );
+    public final void addLoadingHandler( EventHandler handler ) {
+        addHandler( "loading", handler );
     }
 
-    public final CallbackRegistration addLoadedHandler( EventHandler handler ) {
-        return addHandler( "loaded", handler );
+    public final void addLoadedHandler( EventHandler handler ) {
+        addHandler( "loaded", handler );
     }
 
-    public final CallbackRegistration addDocumentStartHandler( EventHandler handler ) {
-        return addHandler( "document-start", handler );
+    public final void addDocumentStartHandler( EventHandler handler ) {
+        addHandler( "document-start", handler );
     }
 
-    public final CallbackRegistration addDocumentEndHandler( EventHandler handler ) {
-        return addHandler( "document-end", handler );
+    public final void addDocumentEndHandler( EventHandler handler ) {
+        addHandler( "document-end", handler );
     }
 
-    public final CallbackRegistration addFocusHandler( EventHandler handler ) {
-        return addHandler( "focus", handler );
+    public final void addFocusHandler( EventHandler handler ) {
+        addHandler( "focus", handler );
     }
 
-    public final CallbackRegistration addBlurHandler( EventHandler handler ) {
-        return addHandler( "blur", handler );
+    public final void addBlurHandler( EventHandler handler ) {
+        addHandler( "blur", handler );
     }
 
-    public final CallbackRegistration addMinimizeHandler( EventHandler handler ) {
-        return addHandler( "minimize", handler );
+    public final void addMinimizeHandler( EventHandler handler ) {
+        addHandler( "minimize", handler );
     }
 
-    public final CallbackRegistration addRestore( EventHandler handler ) {
-        return addHandler( "restore", handler );
+    public final void addRestore( EventHandler handler ) {
+        addHandler( "restore", handler );
     }
 
-    public final CallbackRegistration addMaximizeHandler( EventHandler handler ) {
-        return addHandler( "maximize", handler );
+    public final void addMaximizeHandler( EventHandler handler ) {
+        addHandler( "maximize", handler );
     }
 
-    public final CallbackRegistration addUnMaximizeHandler( EventHandler handler ) {
-        return addHandler( "unmaximize", handler );
+    public final void addUnMaximizeHandler( EventHandler handler ) {
+        addHandler( "unmaximize", handler );
     }
 
-    public final CallbackRegistration addMoveHandler( EventHandler handler ) {
-        return addHandler( "move", handler );
+    public final void addMoveHandler( EventHandler handler ) {
+        addHandler( "move", handler );
     }
 
-    public final CallbackRegistration addResizeHandler( EventHandler handler ) {
-        return addHandler( "resize", handler );
+    public final void addResizeHandler( EventHandler handler ) {
+        addHandler( "resize", handler );
     }
 
-    public final CallbackRegistration addEnterFullScrenHandler( EventHandler handler ) {
-        return addHandler( "enter-fullscreen", handler );
+    public final void addEnterFullScrenHandler( EventHandler handler ) {
+        addHandler( "enter-fullscreen", handler );
     }
 
-    public final CallbackRegistration addLeaveFullScreenHandler( EventHandler handler ) {
-        return addHandler( "leave-fullscreen", handler );
+    public final void addLeaveFullScreenHandler( EventHandler handler ) {
+        addHandler( "leave-fullscreen", handler );
     }
 
-    public final CallbackRegistration addZoomHandler( EventHandler handler ) {
-        return addHandler( "zoom", handler );
+    public final void addZoomHandler( EventHandler handler ) {
+        addHandler( "zoom", handler );
     }
 
-    public final CallbackRegistration addCapturePageDoneHandler( EventHandler handler ) {
-        return addHandler( "capturepagedone", handler );
+    public final void addCapturePageDoneHandler( EventHandler handler ) {
+        addHandler( "capturepagedone", handler );
     }
 
-    public final CallbackRegistration addDevToolsOpenedHandler( EventHandler handler ) {
-        return addHandler( "devtools-opened", handler );
+    public final void addDevToolsOpenedHandler( EventHandler handler ) {
+        addHandler( "devtools-opened", handler );
     }
 
-    public final CallbackRegistration addDevToolsCloseddHandler( EventHandler handler ) {
-        return addHandler( "devtools-closed", handler );
+    public final void addDevToolsCloseddHandler( EventHandler handler ) {
+        addHandler( "devtools-closed", handler );
     }
 
-    public final CallbackRegistration addNewWinPolicyHandler( EventHandler handler ) {
-        return addHandler( "new-win-policy", handler );
+    public final void addNewWinPolicyHandler( EventHandler handler ) {
+        addHandler( "new-win-policy", handler );
     }
+
+    public final native void addHandler( String event, EventHandler handler )/*-{
+		var f = function() {
+			handler.@com.ait.toolkit.node.core.node.event.EventHandler::onEvent()();
+		};
+		this.on(event, f);
+    }-*/;
 
     // TODO Cookie API
 

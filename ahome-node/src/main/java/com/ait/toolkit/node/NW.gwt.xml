@@ -15,5 +15,5 @@
 
 <module>
     <inherits name="com.ait.toolkit.node.Core" />
-	<source path="webkit" />
+	<source path="nw" />
 </module>
